@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>面试-数据库系统 - Felix Feng&#039;s Zone</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="XU FENG&#039;S ZONE"><meta name="msapplication-TileImage" content="/images/avatar.jpg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="XU FENG&#039;S ZONE"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Abstract: 常见的数据库面试题集合，包括Leetcode面试宝典、阅读整理、课堂资料等等。"><meta property="og:type" content="blog"><meta property="og:title" content="面试-数据库系统"><meta property="og:url" content="https://2horse9sun.github.io/2021/04/26/2021-04-26-interview-database-systems/"><meta property="og:site_name" content="Felix Feng&#039;s Zone"><meta property="og:description" content="Abstract: 常见的数据库面试题集合，包括Leetcode面试宝典、阅读整理、课堂资料等等。"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://2horse9sun.github.io/images/banners/dbms.png"><meta property="article:published_time" content="2021-04-25T16:00:00.000Z"><meta property="article:modified_time" content="2022-01-11T05:08:10.188Z"><meta property="article:author" content="Felix Feng"><meta property="article:tag" content="Interview"><meta property="article:tag" content="Database"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/images/banners/dbms.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://2horse9sun.github.io/2021/04/26/2021-04-26-interview-database-systems/"},"headline":"面试-数据库系统","image":["https://2horse9sun.github.io/images/banners/dbms.png"],"datePublished":"2021-04-25T16:00:00.000Z","dateModified":"2022-01-11T05:08:10.188Z","author":{"@type":"Person","name":"Felix Feng"},"publisher":{"@type":"Organization","name":"Felix Feng's Zone","logo":{"@type":"ImageObject","url":"https://2horse9sun.github.io/images/site-logo.png"}},"description":"Abstract: 常见的数据库面试题集合，包括Leetcode面试宝典、阅读整理、课堂资料等等。"}</script><link rel="canonical" href="https://2horse9sun.github.io/2021/04/26/2021-04-26-interview-database-systems/"><link rel="icon" href="/images/avatar.jpg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?6295a3485ca71319f7c2bb6050180382";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/site-logo.png" alt="Felix Feng&#039;s Zone" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/categories/Project">Project</a><a class="navbar-item" href="/categories/Essay">Essay</a><a class="navbar-item" href="/categories">Category</a><a class="navbar-item" href="/tags">Tag</a><a class="navbar-item" href="/archives">Archive</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/images/banners/dbms.png" alt="面试-数据库系统"></span></div><article class="card-content article" role="article"><h1 class="title is-4 is-size-4-mobile" style="font-weight: bold">面试-数据库系统</h1><div class="article-meta is-size-7 level is-mobile" style="margin-top: -0.5rem; margin-bottom: 0.5rem"><div class="level-left"><i class="fas fa-calendar-alt"></i>  <span class="level-item"><time dateTime="2021-04-25T16:00:00.000Z" title="2021-4-26 12:00:00 ├F10: AM┤">2021-04-26</time></span><i class="fas fa-folder-open"></i>  <span class="level-item"><a class="link-muted" href="/categories/Blog/">Blog</a></span><i class="fas fa-eye"></i><span>  </span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><hr style="height:1px;margin:1rem 0"><div class="content" style=""><p>Abstract: 常见的数据库面试题集合，包括Leetcode面试宝典、阅读整理、课堂资料等等。</p>
+<span id="more"></span>
+
+<p>Quick Link: <a href="https://2horse9sun.github.io/2021/04/15/interview-overview.html">面试-2021微信暑期实习</a></p>
+<p>（非完整版~）</p>
+<h2 id="1-数据库系统基础"><a href="#1-数据库系统基础" class="headerlink" title="1 数据库系统基础"></a>1 数据库系统基础</h2><h3 id="1-0-简述一个DBMS的一般架构"><a href="#1-0-简述一个DBMS的一般架构" class="headerlink" title="1.0 简述一个DBMS的一般架构"></a>1.0 简述一个DBMS的一般架构</h3><p><img src="/images/posts/DBMS_architecture.png" alt="DBMS_architecture"></p>
+<p>一般的体系结构：分层，为上一层提供抽象接口</p>
+<ol>
+<li>数据库管理系统的客户端</li>
+<li>查询语句分析和优化：分析、检查SQL语句，优化查询方案</li>
+<li>关系运算符：在记录和文件上执行一个数据流操作</li>
+<li>文件和索引管理：把数据库表和记录组织成多个页，多个页形成一个逻辑文件。</li>
+<li>缓存管理：加快查询速度</li>
+<li>磁盘空间管理：对设备发出存取页的请求</li>
+<li>并发控制：事务，实现并发查询，保证原子性、隔离性、一致性。</li>
+<li>恢复：数据库崩溃时，保证数据持久性</li>
+</ol>
+<h3 id="1-1-磁盘与文件"><a href="#1-1-磁盘与文件" class="headerlink" title="1.1 磁盘与文件"></a>1.1 磁盘与文件</h3><h4 id="1-1-1-简述磁盘操作的特点"><a href="#1-1-1-简述磁盘操作的特点" class="headerlink" title="1.1.1 简述磁盘操作的特点"></a>1.1.1 简述磁盘操作的特点</h4><ol>
+<li>读取操作：将多个数据页从磁盘读取到RAM中</li>
+<li>写入操作：将多个数据页从RAM写入到磁盘中</li>
+<li>速度非常非常的慢</li>
+</ol>
+<h4 id="1-1-2-简述计算机中的存储层级结构"><a href="#1-1-2-简述计算机中的存储层级结构" class="headerlink" title="1.1.2 简述计算机中的存储层级结构"></a>1.1.2 简述计算机中的存储层级结构</h4><p><img src="/images/posts/storage_hierarchy.png" alt="storage_hierarchy"></p>
+<h4 id="1-1-3-简述磁盘的结构，如何计算磁盘容量"><a href="#1-1-3-简述磁盘的结构，如何计算磁盘容量" class="headerlink" title="1.1.3 简述磁盘的结构，如何计算磁盘容量"></a>1.1.3 简述磁盘的结构，如何计算磁盘容量</h4><p><img src="/images/posts/disk_structure.png" alt="disk_structure"></p>
+<p>结构：</p>
+<ol>
+<li>盘片：一个或多个，有两个面，用于存储数据。</li>
+<li>主轴：盘片围绕主轴旋转</li>
+<li>组合臂：组合臂上有多个磁头臂</li>
+<li>磁头：负责读写数据，沿磁头臂移动来寻找合适的磁道。有多少个盘面就有多少个磁头。</li>
+<li>磁道：盘片上的一个个同心圆</li>
+<li>扇区：磁道被划分为的一个个圆弧段，<strong>是磁盘上的最小物理存储单元</strong>。每个扇区存储512字节。</li>
+<li>柱面：抽象出来的逻辑概念，处于同一个垂直区域的磁道称为柱面。磁盘读写数据按柱面进行，一般把数据存储到同一柱面。</li>
+</ol>
+<p>容量计算：盘面数 × 柱面数(磁道数) × 扇区数 × 512 （字节）</p>
+<h4 id="1-1-4-如何计算磁盘访问时间"><a href="#1-1-4-如何计算磁盘访问时间" class="headerlink" title="1.1.4 如何计算磁盘访问时间"></a>1.1.4 如何计算磁盘访问时间</h4><ol>
+<li>寻道时间：磁头移动到对应的磁道，~2-3ms</li>
+<li>旋转时间：盘片旋转到对应的扇区，~0-4ms</li>
+<li>传输时间：数据传送到RAM的时间，~0.25ms per 64KB page</li>
+</ol>
+<h4 id="1-1-5-DBMS体系结构中磁盘空间管理器的作用是什么"><a href="#1-1-5-DBMS体系结构中磁盘空间管理器的作用是什么" class="headerlink" title="1.1.5 DBMS体系结构中磁盘空间管理器的作用是什么"></a>1.1.5 DBMS体系结构中磁盘空间管理器的作用是什么</h4><ol>
+<li>将数据页映射到磁盘中</li>
+<li>将数据页从磁盘载入到内存</li>
+<li>将数据页从内存保存到磁盘</li>
+<li>高层结构可以依赖底层的操作读写以及分配销毁页面</li>
+</ol>
+<h4 id="1-1-6-数据库如何实现一个磁盘空间管理器"><a href="#1-1-6-数据库如何实现一个磁盘空间管理器" class="headerlink" title="1.1.6 数据库如何实现一个磁盘空间管理器"></a>1.1.6 数据库如何实现一个磁盘空间管理器</h4><p>依赖操作系统的文件系统。一个数据库文件可能存储在不同的文件系统中。</p>
+<h4 id="1-1-7-数据库的表、文件、页、记录之间的关系"><a href="#1-1-7-数据库的表、文件、页、记录之间的关系" class="headerlink" title="1.1.7 数据库的表、文件、页、记录之间的关系"></a>1.1.7 数据库的表、文件、页、记录之间的关系</h4><p><img src="/images/posts/table_file_page_record.png" alt="table_file_page_record"></p>
+<ol>
+<li>表被存储为一个或多个逻辑文件</li>
+<li>每个逻辑文件中包含多个页。在磁盘中，页被磁盘管理器管理。在内存中，页被缓存管理器管理。</li>
+<li>每个页中含有多条记录</li>
+</ol>
+<h4 id="1-1-8-有哪些数据库文件组织结构"><a href="#1-1-8-有哪些数据库文件组织结构" class="headerlink" title="1.1.8 有哪些数据库文件组织结构"></a>1.1.8 有哪些数据库文件组织结构</h4><ol>
+<li>无序堆组织文件：记录被随意的放置到页中</li>
+<li>聚集堆组织文件：记录和页被分组</li>
+<li>有序组织文件：页和记录被排序</li>
+<li>索引组织文件：如B+ Tree，可能包含记录或指向其它记录的指针</li>
+</ol>
+<h4 id="1-1-9-如何实现一个堆组织文件"><a href="#1-1-9-如何实现一个堆组织文件" class="headerlink" title="1.1.9 如何实现一个堆组织文件"></a>1.1.9 如何实现一个堆组织文件</h4><ol>
+<li><p>使用链表：满页链表和空闲页链表</p>
+<p><img src="/images/posts/heap_file_list.png" alt="heap_file_list"></p>
+</li>
+<li><p>使用页目录：目录项指向相应数据页，能更快的定位页。页目录通常被载入缓存中，提高效率。</p>
+<p><img src="/images/posts/heap_file_pd.png" alt="heap_file_pd"></p>
+</li>
+</ol>
+<h4 id="1-1-10-简述数据页的结构"><a href="#1-1-10-简述数据页的结构" class="headerlink" title="1.1.10 简述数据页的结构"></a>1.1.10 简述数据页的结构</h4><p><img src="/images/posts/slotted_page.png" alt="slotted_page"></p>
+<p>slotted page 结构：既适用于定长记录，也适用于变长记录。</p>
+<p>每个页的底部放置slot directory，包含：指向空闲位置的指针，指向记录的指针，每条记录的长度，slot的数量</p>
+<h4 id="1-1-11-简述变长记录-VLR-的格式"><a href="#1-1-11-简述变长记录-VLR-的格式" class="headerlink" title="1.1.11 简述变长记录(VLR)的格式"></a>1.1.11 简述变长记录(VLR)的格式</h4><p><img src="/images/posts/VLR.png" alt="VLR"></p>
+<h4 id="1-1-12-对堆组织文件和有序组织文件进行各种操作的时间是多少"><a href="#1-1-12-对堆组织文件和有序组织文件进行各种操作的时间是多少" class="headerlink" title="1.1.12 对堆组织文件和有序组织文件进行各种操作的时间是多少"></a>1.1.12 对堆组织文件和有序组织文件进行各种操作的时间是多少</h4><p><img src="/images/posts/time_complexity.png" alt="time_complexity"></p>
+<p>B: 数据块（页）的个数</p>
+<p>R：每个数据块中的记录数</p>
+<p>D：磁盘读写平均时间</p>
+<h3 id="1-2-索引管理"><a href="#1-2-索引管理" class="headerlink" title="1.2 索引管理"></a>1.2 索引管理</h3><h4 id="1-2-1-什么是索引，有哪些索引结构"><a href="#1-2-1-什么是索引，有哪些索引结构" class="headerlink" title="1.2.1 什么是索引，有哪些索引结构"></a>1.2.1 什么是索引，有哪些索引结构</h4><p>一种数据结构，能通过建立索引的键对记录进行快速查找和修改。</p>
+<p>种类：B+ Tree，Hash, R-Tree, GIST…</p>
+<h4 id="1-2-2-简述B-Tree的结构"><a href="#1-2-2-简述B-Tree的结构" class="headerlink" title="1.2.2 简述B+ Tree的结构"></a>1.2.2 简述B+ Tree的结构</h4><p><img src="/images/posts/b_plus_tree_structure.png" alt="b_plus_tree_structure"></p>
+<p>d为树的order，最大的fan-out为2d+1。上图中d=2。高度h=2。</p>
+<p>每个节点中的条目都满足：d&lt;= #entries&lt;=2d。</p>
+<p>最大记录数：$$(2d+1)^{h}\times 2d$$</p>
+<p>实际应用中，d约为1600，填充因子约为67%，平均fan-out约为2144</p>
+<h4 id="1-2-3-使用索引时，数据项有几种存放方式"><a href="#1-2-3-使用索引时，数据项有几种存放方式" class="headerlink" title="1.2.3 使用索引时，数据项有几种存放方式"></a>1.2.3 使用索引时，数据项有几种存放方式</h4><ol>
+<li><p>Alternative 1：存值，记录的内容存储在索引文件中，不需要指针</p>
+<p><img src="/images/posts/alternative1.png" alt="alternative1"></p>
+</li>
+<li><p>Alternative 2：存引用，&lt;索引，匹配记录的RID&gt;</p>
+<p><img src="/images/posts/alternative2.png" alt="alternative1"></p>
+</li>
+<li><p>Alternative 3：存引用的列表，&lt;索引，匹配记录的RID列表&gt;</p>
+<p><img src="/images/posts/alternative3.png" alt="alternative1"></p>
+</li>
+</ol>
+<h4 id="1-2-4-聚集索引和非聚集索引的区别"><a href="#1-2-4-聚集索引和非聚集索引的区别" class="headerlink" title="1.2.4 聚集索引和非聚集索引的区别"></a>1.2.4 聚集索引和非聚集索引的区别</h4><p>Alternative 2 和Alternative 3 的两种索引可以是聚集的或非聚集的。</p>
+<p>聚集索引：堆文件组织中的记录根据索引排序。</p>
+<p><img src="/images/posts/cluster.png" alt="cluster"></p>
+<p>聚集索引的优点：</p>
+<ol>
+<li>范围搜索高效</li>
+<li>有效利用空间局部性（顺序存取，预取，缓存）</li>
+<li>支持压缩</li>
+</ol>
+<p>聚集索引的缺点：</p>
+<ol>
+<li>难以维护：需周期性更新堆文件组织的顺序</li>
+<li>堆文件不能填满，留下足够空间便于插入。</li>
+</ol>
+<h4 id="1-2-5-对堆组织文件、有序组织文件和聚集索引文件进行各种操作的时间是多少"><a href="#1-2-5-对堆组织文件、有序组织文件和聚集索引文件进行各种操作的时间是多少" class="headerlink" title="1.2.5 对堆组织文件、有序组织文件和聚集索引文件进行各种操作的时间是多少"></a>1.2.5 对堆组织文件、有序组织文件和聚集索引文件进行各种操作的时间是多少</h4><p><img src="/images/posts/time_complexity_2.png" alt="time_complexity_2"></p>
+<p>B: 数据块（页）的个数</p>
+<p>R：每个数据块中的记录数</p>
+<p>D：磁盘读写平均时间</p>
+<p>F：非叶子节点的平均fan-out</p>
+<p>E：每个叶子节点记录的平均个数</p>
+<h3 id="1-3-缓冲区管理"><a href="#1-3-缓冲区管理" class="headerlink" title="1.3 缓冲区管理"></a>1.3 缓冲区管理</h3><h4 id="1-3-1-简述缓冲区的工作流程"><a href="#1-3-1-简述缓冲区的工作流程" class="headerlink" title="1.3.1 简述缓冲区的工作流程"></a>1.3.1 简述缓冲区的工作流程</h4><p><img src="/images/posts/buffer_work.png" alt="buffer_work"></p>
+<h4 id="1-3-2-缓冲区的页有哪些状态字段"><a href="#1-3-2-缓冲区的页有哪些状态字段" class="headerlink" title="1.3.2 缓冲区的页有哪些状态字段"></a>1.3.2 缓冲区的页有哪些状态字段</h4><p><img src="/images/posts/frame_state.png" alt="frame_state"></p>
+<p>FrameId：缓冲区中的页编号</p>
+<p>PageId：磁盘中的页编号</p>
+<p>Dirty：是否是脏页。脏页会被周期性地或在被替换时回写至磁盘</p>
+<p>Pin Count：正在使用该页的进程数量</p>
+<h4 id="1-3-3-简述缓冲区的几种替换策略"><a href="#1-3-3-简述缓冲区的几种替换策略" class="headerlink" title="1.3.3 简述缓冲区的几种替换策略"></a>1.3.3 简述缓冲区的几种替换策略</h4><ol>
+<li><p>LRU，最近最少使用，通常用哈希表加双向链表实现。适合随机存取时使用。</p>
+<p>优点：对于某些热点页的重复访问很高效</p>
+<p>缺点：算法较复杂，开销大。若遇到大文件的全表扫描，可能出现sequential flooding，导致命中率为0</p>
+<p>如何解决sequential flooding：MRU或prefetch。</p>
+<p><img src="/images/posts/LRU_structure.png" alt="LRU_structure"></p>
+</li>
+<li><p>近似LRU（时钟置换算法）：改进LRU开销大的缺点。我们给每一个页面设置一个标记位u，u=1表示最近有使用u=0则表示该页面最近没有被使用，应该被逐出。</p>
+<p><img src="/images/posts/clock.png" alt="clock"></p>
+</li>
+<li><p>MRU，最近最多使用，能解决全表扫描出现的问题。如某些表连接操作。</p>
+</li>
+</ol>
+<h4 id="1-3-4-为什么DBMS不使用OS自带的页面高速缓存功能"><a href="#1-3-4-为什么DBMS不使用OS自带的页面高速缓存功能" class="headerlink" title="1.3.4 为什么DBMS不使用OS自带的页面高速缓存功能"></a>1.3.4 为什么DBMS不使用OS自带的页面高速缓存功能</h4><ol>
+<li>不同的文件系统，缓存机制可能不同</li>
+<li>DBMS需要强制将特定页面刷新到磁盘的功能，比如某些日志</li>
+<li>DBMS可以根据自己的架构特点，设计合适的缓存机制，达到最高效率</li>
+</ol>
+<h3 id="1-4-表连接"><a href="#1-4-表连接" class="headerlink" title="1.4 表连接"></a>1.4 表连接</h3><h4 id="1-4-1-什么时候数据库记录需要排序"><a href="#1-4-1-什么时候数据库记录需要排序" class="headerlink" title="1.4.1 什么时候数据库记录需要排序"></a>1.4.1 什么时候数据库记录需要排序</h4><ol>
+<li>去除重复记录（DISTINCT）</li>
+<li>记录分组（GROUP BY）</li>
+<li>便于Sort-Merge Join (SMJ)表连接算法</li>
+<li>返回有序记录（ORDER BY）</li>
+</ol>
+<h4 id="1-4-2-什么是外部排序，具体原理是什么"><a href="#1-4-2-什么是外部排序，具体原理是什么" class="headerlink" title="1.4.2 什么是外部排序，具体原理是什么"></a>1.4.2 什么是外部排序，具体原理是什么</h4><p><img src="/images/posts/out-of-core-merge-sort.png" alt="out-of-core-merge-sort"></p>
+<p>给定：</p>
+<ol>
+<li>一个包含所有记录的数据库文件F存储在磁盘中，占用N个数据块。</li>
+<li>一个拥有B个数据块容量的内存。（N &gt;&gt; B）</li>
+</ol>
+<p>要求：在磁盘中存入文件Fs，里面的所有记录都被排好序。</p>
+<p><strong>多路外部归并排序</strong>步骤：</p>
+<ol>
+<li><p>Pass 0：将F拆分成$\lceil\frac{N}{B}\rceil$个子文件（B-pages的run），每个子文件送入内存中排序，再存回磁盘中。这样，磁盘中的F被分成了$\lceil\frac{N}{B}\rceil$个有序子文件。</p>
+</li>
+<li><p>Pass 1：将内存划分为B-1个输入缓冲区和1个输出缓冲区，内存每次从磁盘载入B-1个数据块（各数据块内部已经有序），对其进行B-1路归并排序，排序结果传到输出缓冲区中，若满，则输出缓冲区将数据存入磁盘。</p>
+<p>经过第一个Pass（可能经过若干次I/O操作），磁盘中的F被分成了$\lceil\frac{N}{B(B-1)}\rceil$个有序子文件（B(B-1)-pages的run）。</p>
+</li>
+<li><p>使用与Pass 1中相同的方法，一直递归进行，最终将会得到1个有序文件（N-pages的run）。</p>
+</li>
+</ol>
+<p>开销情况：</p>
+<ol>
+<li>需要多少个Pass：$1+\lceil\log_{B-1}\lceil N/B\rceil\rceil$</li>
+<li>若一次存/取页面算一次I/O操作，总共需要多少次：2N*(# of passes)</li>
+</ol>
+<h4 id="1-4-3-什么时候数据库记录需要进行hash操作"><a href="#1-4-3-什么时候数据库记录需要进行hash操作" class="headerlink" title="1.4.3 什么时候数据库记录需要进行hash操作"></a>1.4.3 什么时候数据库记录需要进行hash操作</h4><p>只需要知道记录之间是否匹配即可，并不一定需要知道顺序。如：去除重复记录，记录分组可以使用hash操作。</p>
+<h4 id="1-4-4-什么是外部hashing，具体原理是什么"><a href="#1-4-4-什么是外部hashing，具体原理是什么" class="headerlink" title="1.4.4 什么是外部hashing，具体原理是什么"></a>1.4.4 什么是外部hashing，具体原理是什么</h4><p><img src="/images/posts/external_hashing.png" alt="external_hashing"></p>
+<p>在内存中建立一张哈希表，查找某条记录时，通过哈希表的映射，直接找到页所在的partition。<strong>需要确保每个partition的大小必须不大于B</strong>。</p>
+<p>步骤：</p>
+<ol>
+<li>Divide：读取磁盘中所有的记录，使用哈希函数$h_p$，把记录存储到磁盘特定的partition中。</li>
+<li>Conquer：读取磁盘中的每个partition，对每个不大于B的partition，使用哈希函数$h_r$建立哈希表，并写回磁盘。若某个partition大小大于B，则对那个partition继续进行Divide和Conquer操作，直至递归完成。</li>
+</ol>
+<h4 id="1-4-5-sorting和hashing各自的优点"><a href="#1-4-5-sorting和hashing各自的优点" class="headerlink" title="1.4.5 sorting和hashing各自的优点"></a>1.4.5 sorting和hashing各自的优点</h4><p>Hashing:</p>
+<ol>
+<li>重复记录的删除</li>
+<li>并行化时能把容易地平均分发</li>
+</ol>
+<p>Sorting:</p>
+<ol>
+<li>本来就有排序的需求</li>
+<li>对重复记录不敏感</li>
+<li>有时很难选出好的哈希函数</li>
+</ol>
+<h4 id="1-4-6-简述数据库查询语言如何转化成对数据的具体操作"><a href="#1-4-6-简述数据库查询语言如何转化成对数据的具体操作" class="headerlink" title="1.4.6 简述数据库查询语言如何转化成对数据的具体操作"></a>1.4.6 简述数据库查询语言如何转化成对数据的具体操作</h4><p><img src="/images/posts/operator.png" alt="operator"></p>
+<h4 id="1-4-7-什么是Simple-Nested-Loops-Join-SNLJ"><a href="#1-4-7-什么是Simple-Nested-Loops-Join-SNLJ" class="headerlink" title="1.4.7 什么是Simple Nested Loops Join (SNLJ)"></a>1.4.7 什么是Simple Nested Loops Join (SNLJ)</h4><p>假设$S$为一张数据表，令$[S]$表示表中所有页的数量，$|S|$表示表中所有的记录数，$P_R$表示每个页中的记录数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># SNLJ</span></span><br><span class="line"><span class="keyword">for</span> record r <span class="keyword">in</span> R:</span><br><span class="line">    <span class="keyword">for</span> record s <span class="keyword">in</span> S:</span><br><span class="line">        <span class="keyword">if</span> r==s:</span><br><span class="line">            add &lt;r, s&gt; to result buffer</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/posts/SNLJ.png" alt="SNLJ"></p>
+<h4 id="1-4-8-什么是Page-Nested-Loop-Join-PNLJ"><a href="#1-4-8-什么是Page-Nested-Loop-Join-PNLJ" class="headerlink" title="1.4.8 什么是Page Nested Loop Join (PNLJ)"></a>1.4.8 什么是Page Nested Loop Join (PNLJ)</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># PNLJ</span></span><br><span class="line"><span class="keyword">for</span> page rp <span class="keyword">in</span> R:</span><br><span class="line">    <span class="keyword">for</span> page sp <span class="keyword">in</span> S:</span><br><span class="line">        <span class="keyword">for</span> record r <span class="keyword">in</span> rp:</span><br><span class="line">            <span class="keyword">for</span> record s <span class="keyword">in</span> sp:</span><br><span class="line">                <span class="keyword">if</span> r==s:</span><br><span class="line">                    add &lt;r, s&gt; to result buffer</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/posts/PNLJ.png" alt="PNLJ"></p>
+<h4 id="1-4-9-什么是Block-Nested-Loop-Join-BNLJ"><a href="#1-4-9-什么是Block-Nested-Loop-Join-BNLJ" class="headerlink" title="1.4.9 什么是Block Nested Loop Join (BNLJ)"></a>1.4.9 什么是Block Nested Loop Join (BNLJ)</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># BNLJ</span></span><br><span class="line"><span class="keyword">for</span> block rb of B-<span class="number">2</span> pages <span class="keyword">in</span> R:</span><br><span class="line">    <span class="keyword">for</span> page sp <span class="keyword">in</span> S:</span><br><span class="line">        <span class="keyword">for</span> record r <span class="keyword">in</span> rb:</span><br><span class="line">            <span class="keyword">for</span> record s <span class="keyword">in</span> sp:</span><br><span class="line">                <span class="keyword">if</span> r==s:</span><br><span class="line">                    add &lt;r, s&gt; to result buffer</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/posts/BNLJ.png" alt="BNLJ"></p>
+<h4 id="1-4-10-什么是Index-Nested-Loop-Join-INLJ"><a href="#1-4-10-什么是Index-Nested-Loop-Join-INLJ" class="headerlink" title="1.4.10 什么是Index Nested Loop Join (INLJ)"></a>1.4.10 什么是Index Nested Loop Join (INLJ)</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># INLJ</span></span><br><span class="line"><span class="keyword">for</span> record r <span class="keyword">in</span> R:</span><br><span class="line">    <span class="keyword">for</span> record s <span class="keyword">in</span> lookup(S, r):</span><br><span class="line">        add &lt;r, s&gt; to result buffer</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/posts/INLJ.png" alt="INLJ"></p>
+<h4 id="1-4-11-什么是Sort-Merge-Join-SMJ"><a href="#1-4-11-什么是Sort-Merge-Join-SMJ" class="headerlink" title="1.4.11 什么是Sort-Merge Join (SMJ)"></a>1.4.11 什么是Sort-Merge Join (SMJ)</h4><p>两个阶段：</p>
+<ol>
+<li>先对R和S根据要连接的键值进行排序</li>
+<li>对有序的R和S进行Merge连接</li>
+</ol>
+<p><img src="/images/posts/SMJ_1.png" alt="SMJ_1"></p>
+<p><img src="/images/posts/SMJ_2.png" alt="SMJ_2"></p>
+<h4 id="1-4-12-什么是Grace-Hash-Join-GHJ"><a href="#1-4-12-什么是Grace-Hash-Join-GHJ" class="headerlink" title="1.4.12 什么是Grace Hash Join (GHJ)"></a>1.4.12 什么是Grace Hash Join (GHJ)</h4><p>两个阶段：</p>
+<ol>
+<li>分组：内存划为1个输入缓冲区和B-1个输出缓冲区，输入两个表的所有数据，通过哈希函数映射键值，将数据存储到B-1个不同的partition。这样保证了R和S在每个partition的连接记录总和即为两张表的连接总数。</li>
+<li>建立哈希表和搜寻：内存划为1个输入缓冲区，1个输出缓冲区和B-2个哈希表缓冲区。对于每个partition，载入R的记录，对连接键值建立哈希表，然后载入S的记录，对于每条S记录，在哈希表中直接寻找匹配项，发送到输出缓冲区。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GHJ</span></span><br><span class="line"><span class="comment"># parition</span></span><br><span class="line"><span class="keyword">for</span> currtbl <span class="keyword">in</span> [R, S]:</span><br><span class="line">    <span class="keyword">for</span> page p <span class="keyword">in</span> currtbl:</span><br><span class="line">        read p to <span class="built_in">input</span> buffer</span><br><span class="line">        <span class="keyword">for</span> record r <span class="keyword">in</span> p:</span><br><span class="line">            place r to output buffer <span class="comment"># according to hash(r.joinkey)</span></span><br><span class="line">                flush output buffer to disk partition <span class="keyword">if</span> full</span><br><span class="line"><span class="comment"># build &amp; probe</span></span><br><span class="line"><span class="keyword">for</span> part <span class="keyword">in</span> partitions:</span><br><span class="line">    <span class="keyword">for</span> page rp of R <span class="keyword">in</span> part:</span><br><span class="line">        <span class="keyword">for</span> record r <span class="keyword">in</span> rp:</span><br><span class="line">            build r to memory <span class="comment"># according to hash(r.joinkey)</span></span><br><span class="line">	<span class="keyword">for</span> page sp of S <span class="keyword">in</span> part:</span><br><span class="line">        <span class="keyword">for</span> record s <span class="keyword">in</span> sp:</span><br><span class="line">            probe hashtable <span class="keyword">for</span> matches <span class="comment"># according to hash(s.joinkey)</span></span><br><span class="line">            send matches to output buffer</span><br><span class="line">            flush output buffer <span class="keyword">if</span> full</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/posts/GHJ.png" alt="GHJ"></p>
+<h4 id="1-4-13-对比SMJ和GHJ"><a href="#1-4-13-对比SMJ和GHJ" class="headerlink" title="1.4.13 对比SMJ和GHJ"></a>1.4.13 对比SMJ和GHJ</h4><p>SMJ优点：</p>
+<ol>
+<li>如果输入已经排序或输出需要排序会很高效</li>
+<li>对数据倾斜和哈希函数不敏感</li>
+</ol>
+<p>GHJ优点：</p>
+<ol>
+<li>如果输入已经被hash或输出需要hash会很高效</li>
+<li>如果某一张表非常小，会很高效</li>
+</ol>
+<h3 id="1-5-并行化"><a href="#1-5-并行化" class="headerlink" title="1.5 并行化"></a>1.5 并行化</h3><h4 id="1-5-1-简述数据库查询并行方式的分类"><a href="#1-5-1-简述数据库查询并行方式的分类" class="headerlink" title="1.5.1 简述数据库查询并行方式的分类"></a>1.5.1 简述数据库查询并行方式的分类</h4><ol>
+<li><p>Inter-query：每个查询一个线程（没有并行），需要并发控制</p>
+<p><img src="/images/posts/inter-query.png" alt="inter-query"></p>
+</li>
+<li><p>Intra-query（在一个单独的查询中）：</p>
+<ol>
+<li><p>Inter-operator</p>
+<p><img src="/images/posts/inter-operator.png" alt="inter-operator"></p>
+</li>
+<li><p>Intra-operator</p>
+<p><img src="/images/posts/intra-operator.png" alt="intra-operator"></p>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="1-5-2-有哪些并行化架构"><a href="#1-5-2-有哪些并行化架构" class="headerlink" title="1.5.2 有哪些并行化架构"></a>1.5.2 有哪些并行化架构</h4><p><img src="/images/posts/parallel_architecture.png" alt="parallel_architecture"></p>
+<h4 id="1-5-3-把数据表分发到多台机器-磁盘上的几种方式-Data-Partitioning"><a href="#1-5-3-把数据表分发到多台机器-磁盘上的几种方式-Data-Partitioning" class="headerlink" title="1.5.3 把数据表分发到多台机器/磁盘上的几种方式(Data Partitioning)"></a>1.5.3 把数据表分发到多台机器/磁盘上的几种方式(Data Partitioning)</h4><p><img src="/images/posts/data-partitioning.png" alt="data-partitioning"></p>
+<h4 id="1-5-4-根据范围进行分组时，如何使每台机器上分发到的数据量基本相同"><a href="#1-5-4-根据范围进行分组时，如何使每台机器上分发到的数据量基本相同" class="headerlink" title="1.5.4 根据范围进行分组时，如何使每台机器上分发到的数据量基本相同"></a>1.5.4 根据范围进行分组时，如何使每台机器上分发到的数据量基本相同</h4><p><img src="/images/posts/histogram.png" alt="histogram"></p>
+<p>对数据进行随机采样，根据采样建立数据的分布直方图，然后选择合适的范围进行分组。</p>
+<h4 id="1-5-5-简述如何实现并行化sorting和hashing"><a href="#1-5-5-简述如何实现并行化sorting和hashing" class="headerlink" title="1.5.5 简述如何实现并行化sorting和hashing"></a>1.5.5 简述如何实现并行化sorting和hashing</h4><p>sorting: 先根据范围，将数据分发到对应的机器上，然后执行单节点sorting。</p>
+<p><img src="/images/posts/p_sorting.png" alt="p_sorting"></p>
+<p>hashing: 先根据某个哈希函数，将数据分发到对应的机器上，然后执行单节点hashing。</p>
+<p><img src="/images/posts/p_hashing.png" alt="p_hashing"></p>
+<h4 id="1-5-6-简述如何实现并行化SMJ和GHJ"><a href="#1-5-6-简述如何实现并行化SMJ和GHJ" class="headerlink" title="1.5.6 简述如何实现并行化SMJ和GHJ"></a>1.5.6 简述如何实现并行化SMJ和GHJ</h4><p>并行化SMJ：对表R和表S分别进行并行化sorting，然后执行单节点SMJ</p>
+<p><img src="/images/posts/PSMJ.png" alt="PSMJ"></p>
+<p>并行化GHJ：对表R和表S分别进行并行化hashing，然后执行单节点GHJ</p>
+<p><img src="/images/posts/PGHJ.png" alt="PGHJ"></p>
+<h3 id="1-6-查询优化（基于System-R-Selinger-Optimizer）"><a href="#1-6-查询优化（基于System-R-Selinger-Optimizer）" class="headerlink" title="1.6 查询优化（基于System R / Selinger Optimizer）"></a>1.6 查询优化（基于System R / Selinger Optimizer）</h3><h4 id="1-6-1-简述查询分析和优化的流程"><a href="#1-6-1-简述查询分析和优化的流程" class="headerlink" title="1.6.1 简述查询分析和优化的流程"></a>1.6.1 简述查询分析和优化的流程</h4><p><img src="/images/posts/parser_optimization.png" alt="parser_optimization"></p>
+<ol>
+<li>parser: 检查SQL语句正确性，生成语法树</li>
+<li>rewriter: 对查询做进一步处理，生成一个个查询块。如处理视图，处理子查询</li>
+<li>optimizer：一次优化一个查询块，利用catalog找到较小开销的查询方案。</li>
+</ol>
+<h4 id="1-6-2-简述优化器的工作原理和目标"><a href="#1-6-2-简述优化器的工作原理和目标" class="headerlink" title="1.6.2 简述优化器的工作原理和目标"></a>1.6.2 简述优化器的工作原理和目标</h4><p><img src="/images/posts/optimizer_work.png" alt="optimizer_work"></p>
+<p>工作原理：</p>
+<p>每个查询块都可以用关系代数来表示，关系代数被转化成查询树，每个树节点都对应了相应的查询算子（扫描算子/全表扫描、连接算子/表连接、选择算子/条件查询、投影(projection)算子/字段选择）。但是，每个关系代数可以生成多种查询树，导致执行查询算子的次序不同，进而影响查询的效率。</p>
+<p><strong>需要考虑的三个问题</strong>：</p>
+<ol>
+<li><strong>Plan space</strong>：给定一个查询块，我们需要考虑哪些查询方案</li>
+<li><strong>Cost estimation</strong>：给定一个方案，我们如何估计查询的开销</li>
+<li><strong>Search strategy</strong>：如何利用估计出来的开销在plan space中搜索较优的解</li>
+</ol>
+<p>优化目标：找到估计开销最小的查询方案（不一定最优），避免效率极差的方案。</p>
+<h4 id="1-6-3-简述几种常见的优化策略"><a href="#1-6-3-简述几种常见的优化策略" class="headerlink" title="1.6.3 简述几种常见的优化策略"></a>1.6.3 简述几种常见的优化策略</h4><ol>
+<li>多表连接时，可以适当交换连接次序</li>
+<li>表连接时，试采用不同的表连接方法(PNLJ/BNLJ/INLJ/SMJ/GHJ)</li>
+<li>下推选择算子：没必要在表连接后再做选择，可以提前做选择，过滤掉不符合条件的记录，减小表连接的开销</li>
+<li>下推投影算子：提前去除不需要的字段，减小总的数据传输量</li>
+<li>避免交叉积（表1每条记录与表2的每条记录匹配生成新记录）</li>
+</ol>
+<h4 id="1-6-4-如何确定plan-space"><a href="#1-6-4-如何确定plan-space" class="headerlink" title="1.6.4 如何确定plan space"></a>1.6.4 如何确定plan space</h4><p><img src="/images/posts/plan_space.png" alt="plan_space"></p>
+<p>剪枝，只考虑left-deep join tree，避免使用交叉积。</p>
+<p>优点：</p>
+<ol>
+<li>限制搜索空间</li>
+<li>便于使用流水线的并行操作</li>
+<li>避免了一些效率极差的查询方案</li>
+</ol>
+<h4 id="1-6-5-如何获取cost-estimation"><a href="#1-6-5-如何获取cost-estimation" class="headerlink" title="1.6.5 如何获取cost  estimation"></a>1.6.5 如何获取cost  estimation</h4><p>有哪些开销：</p>
+<ol>
+<li>每个算子的I/O开销</li>
+<li>每个算子输出的记录大小</li>
+</ol>
+<p>总开销：# of I/O + CPU-factor * # of tuples</p>
+<p>如何估算开销情况：数据库系统会周期性地更新Statistics &amp; Catelogs，包含关系和索引的各种信息：</p>
+<p><img src="/images/posts/catelog.png" alt="catelog"></p>
+<p>Selectivity（选择性）= |output| / |input| ，反应出某个算子减小输出记录大小的程度，也称为Reduce Factor。</p>
+<p>选择性的数值越小，代表选择性越高，也就是减小输出的能力越强。</p>
+<p>不同选择算子的选择性：</p>
+<ol>
+<li>col = value: sel = 1 / Nkeys</li>
+<li>col1 = col2: sel = 1 / max(Nkeys1, Nkeys2)</li>
+<li>col &gt; value: sel = (max-value) / (max-min+1)</li>
+</ol>
+<p>如何更准确的估计选择性：使用数据分布直方图(histogram)。</p>
+<h4 id="1-6-6-如何选择Search-strategy"><a href="#1-6-6-如何选择Search-strategy" class="headerlink" title="1.6.6 如何选择Search strategy"></a>1.6.6 如何选择Search strategy</h4><p>使用动态规划算法，自底向上找出最优方案：</p>
+<p><img src="/images/posts/DP_1.png" alt="DP_1"></p>
+<p><img src="/images/posts/DP.png" alt="DP"></p>
+<p><img src="/images/posts/DP_2.png" alt="DP_2"></p>
+<h3 id="1-7-实体关系模型"><a href="#1-7-实体关系模型" class="headerlink" title="1.7 实体关系模型"></a>1.7 实体关系模型</h3><p>（略）</p>
+<h3 id="1-8-函数依赖与规整化"><a href="#1-8-函数依赖与规整化" class="headerlink" title="1.8 函数依赖与规整化"></a>1.8 函数依赖与规整化</h3><h4 id="1-8-1-数据冗余会造成什么后果"><a href="#1-8-1-数据冗余会造成什么后果" class="headerlink" title="1.8.1 数据冗余会造成什么后果"></a>1.8.1 数据冗余会造成什么后果</h4><ol>
+<li>有太多重复值，造成空间浪费</li>
+<li>导致插入/删除/更新操作产生不正常结果</li>
+</ol>
+<h4 id="1-8-2-函数依赖在数据库表结构设计中有什么作用"><a href="#1-8-2-函数依赖在数据库表结构设计中有什么作用" class="headerlink" title="1.8.2 函数依赖在数据库表结构设计中有什么作用"></a>1.8.2 函数依赖在数据库表结构设计中有什么作用</h4><ol>
+<li>帮助检查出数据冗余问题</li>
+<li>帮助改进数据库表结构设计</li>
+</ol>
+<h4 id="1-8-3-一般如何改进表结构设计"><a href="#1-8-3-一般如何改进表结构设计" class="headerlink" title="1.8.3 一般如何改进表结构设计"></a>1.8.3 一般如何改进表结构设计</h4><p>分解(decomposition)，把一张表的某些列分到另一个表中，形成两张表。</p>
+<h4 id="1-8-4-什么是函数依赖X-gt-Y"><a href="#1-8-4-什么是函数依赖X-gt-Y" class="headerlink" title="1.8.4 什么是函数依赖X-&gt;Y"></a>1.8.4 什么是函数依赖X-&gt;Y</h4><p>简单地说：X决定了Y，即若在一张表中，有两个tuple，它们的X字段的值相同，则它们的Y字段的值一定相同。</p>
+<p>严格定义：</p>
+<p>在一个关系结构R中，函数依赖X-&gt;Y表明对于每个关系实例r：$t_1\in r, t_2\in r,\pi_X(t_1)=\pi_X(t_2)=&gt;\pi_Y(t_1)=\pi_Y(t_2)$</p>
+<p>对于 A-&gt;B，如果能找到 A 的真子集 A’，使得 A’-&gt; B，那么 A-&gt;B 就是部分函数依赖，否则就是完全函数依赖。</p>
+<p>对于 A-&gt;B，B-&gt;C，则 A-&gt;C 是一个传递函数依赖。</p>
+<h4 id="1-8-5-简述超级键、候选键和主键的区别"><a href="#1-8-5-简述超级键、候选键和主键的区别" class="headerlink" title="1.8.5 简述超级键、候选键和主键的区别"></a>1.8.5 简述超级键、候选键和主键的区别</h4><p>超级键：一组能决定其它字段的字段。K-&gt;{all attributes}</p>
+<p>候选键（键码）：超级键的最小子集。</p>
+<p>主键：只含一个元素的候选键。</p>
+<h4 id="1-8-6-简述数据冗余产生的原因（举例）"><a href="#1-8-6-简述数据冗余产生的原因（举例）" class="headerlink" title="1.8.6 简述数据冗余产生的原因（举例）"></a>1.8.6 简述数据冗余产生的原因（举例）</h4><p>假设S为候选键，F={R-&gt;W}。</p>
+<p>同一组(R, W)可以在表中出现多次（只要其它字段存在不同），造成冗余。</p>
+<h4 id="1-8-7-简述数据库的范式"><a href="#1-8-7-简述数据库的范式" class="headerlink" title="1.8.7 简述数据库的范式"></a>1.8.7 简述数据库的范式</h4><p>范式理论是为了解决以上提到四种异常（1.8.2）。高级别范式的依赖于低级别的范式，1NF 是最低级别的范式。</p>
+<ol>
+<li><p><strong>第一范式 (1NF)</strong></p>
+<p>属性不可分。</p>
+</li>
+<li><p><strong>第二范式 (2NF)</strong></p>
+<p>每个非主属性 <strong>完全函数依赖于</strong> 键码。可以通过分解来满足。即不存在键码的一个真子集A’，使得A’能决定其它字段。</p>
+</li>
+<li><p><strong>第三范式 (3NF)</strong></p>
+<p>每个非主属性 <strong>完全函数依赖于</strong> 键码 且 <strong>不传递函数依赖于</strong> 键码。即不存在A-&gt;B-&gt;C的情况。</p>
+</li>
+<li><p><strong>BCNF</strong></p>
+<p>消除主属性对码的部分依赖和传递依赖。</p>
+</li>
+</ol>
+<h3 id="1-9-事务"><a href="#1-9-事务" class="headerlink" title="1.9 事务"></a>1.9 事务</h3><h4 id="1-9-1-简述有哪些并发一致性问题"><a href="#1-9-1-简述有哪些并发一致性问题" class="headerlink" title="1.9.1 简述有哪些并发一致性问题"></a>1.9.1 简述有哪些并发一致性问题</h4><ol>
+<li><p><strong>丢失修改</strong>（自己改的，还没提交又被别人改了）：一个事务的更新操作被另外一个事务的更新操作替换。（T1和T2都缺少X锁）</p>
+<p><img src="/images/posts/lost-update.png" alt="lost-update"></p>
+</li>
+<li><p><strong>读脏数据</strong>（读到了别人改的，但是别人后来又不改了）：在不同的事务下，当前事务可以读到另外事务未提交的数据。（T1缺少X锁或T2缺少S锁）</p>
+<p><img src="/images/posts/read-dirty-data.png" alt="read-dirty-data"></p>
+</li>
+<li><p><strong>不可重复读</strong>(前后读取内容不一致)：不可重复读指在一个事务内多次读取同一数据集合。在这一事务还未结束前，另一事务也访问了该同一数据集合并做了修改，由于第二个事务的修改，第一次事务的两次读取的数据可能不一致。（T1缺少X锁或T2获取S锁后读完立即释放，而不是一直保持S锁到提交前）</p>
+<p><img src="/images/posts/no-repeatable-read.png" alt="no-repeatable-read"></p>
+</li>
+<li><p><strong>幻读（Phantom Read）</strong>（前后读取数量不一致）：幻读本质上也属于不可重复读的情况。T1读取某个范围的数据，T2在这个范围内插入新的数据，T1再次读取这个范围的数据，此时读取的结果和和第一次读取的结果不同。（T2插入数据时，没有进行范围加锁）</p>
+<p><img src="/images/posts/illusion-read.png" alt="illusion-read"></p>
+</li>
+</ol>
+<h4 id="1-9-2-简述事务的ACID四大性质"><a href="#1-9-2-简述事务的ACID四大性质" class="headerlink" title="1.9.2 简述事务的ACID四大性质"></a>1.9.2 简述事务的ACID四大性质</h4><p>事务指的是满足 ACID 特性的一组操作，可以通过 Commit 提交一个事务，也可以使用 Rollback 进行回滚。</p>
+<p><strong>Atomicity</strong>：事务中所有操作要么全部发生，要么一个都不发生。回滚可以用回滚日志（Undo Log）来实现，回滚日志记录着事务所执行的修改操作，在回滚时反向执行这些修改操作即可。</p>
+<p><strong>Consistency</strong>：数据库从一种一致的状态转换到另一种一致的状态。在一致性状态下，所有事务对同一个数据的读取结果都是相同的。</p>
+<p><strong>Isolation</strong>：一个事务所做的修改在最终提交以前，对其它事务是不可见的。</p>
+<p><strong>Durability</strong>：一旦事务提交，则其所做的修改将会永远保存到数据库中。即使系统发生崩溃，事务执行的结果也不能丢失。系统发生崩溃可以用重做日志（Redo Log）进行恢复，从而实现持久性。与回滚日志记录数据的逻辑修改不同，重做日志记录的是数据页的物理修改。</p>
+<h4 id="1-9-3-事务ACID性质之间的关系"><a href="#1-9-3-事务ACID性质之间的关系" class="headerlink" title="1.9.3 事务ACID性质之间的关系"></a>1.9.3 事务ACID性质之间的关系</h4><p><img src="/images/posts/ACID.png" alt="ACID"></p>
+<ol>
+<li>只有满足一致性，事务的执行结果才是正确的。</li>
+<li>在无并发的情况下，事务串行执行，隔离性一定能够满足。此时只要能满足原子性，就一定能满足一致性。</li>
+<li>在并发的情况下，多个事务并行执行，事务不仅要满足原子性，还需要满足隔离性，才能满足一致性。</li>
+<li>事务满足持久化是为了能应对系统崩溃的情况。</li>
+</ol>
+<h4 id="1-9-4-简述串行化、可串行化、冲突可串行化几种调度方式的区别"><a href="#1-9-4-简述串行化、可串行化、冲突可串行化几种调度方式的区别" class="headerlink" title="1.9.4 简述串行化、可串行化、冲突可串行化几种调度方式的区别"></a>1.9.4 简述串行化、可串行化、冲突可串行化几种调度方式的区别</h4><p><img src="/images/posts/serializable.png" alt="serializable"></p>
+<p><strong>串行化调度</strong>：每个事务从头执行到尾，执行期间没有任何其它事务在执行。</p>
+<p><strong>可串行化调度</strong>：存在某种不同于串行化的调度方式，但是结果却和串行化等价。</p>
+<p><strong>冲突可串行化调度</strong>：指一个调度,如果通过交换相邻两个无冲突的操作能够转换到某一个串行的调度。</p>
+<h4 id="1-9-5-简述两段锁协议-2PL"><a href="#1-9-5-简述两段锁协议-2PL" class="headerlink" title="1.9.5 简述两段锁协议(2PL)"></a>1.9.5 简述两段锁协议(2PL)</h4><p>悲观的并发控制</p>
+<p><img src="/images/posts/2PL.png" alt="2PL"></p>
+<ol>
+<li>事务执行过程中，若出现一个读操作，则必须在读之前获取S锁；若出现一个写操作，则必须在写之前获取X锁。直到事务取得了所有所需资源的锁，处于Lock Point。</li>
+<li>在Lock Point之后不能再获取任何新锁，如果某时刻再也不需要某个锁，就释放它。</li>
+</ol>
+<p><img src="/images/posts/2PL_tbl.png" alt="2PL_tbl"></p>
+<h4 id="1-9-6-为什么2PL一定可以保证冲突可串行化"><a href="#1-9-6-为什么2PL一定可以保证冲突可串行化" class="headerlink" title="1.9.6 为什么2PL一定可以保证冲突可串行化"></a>1.9.6 为什么2PL一定可以保证冲突可串行化</h4><p>当事务达到Lock Point之时，它拥有了所有需要资源的锁。</p>
+<p>对于与它冲突的其它事务：要么处在获取锁的阶段（被当前事务阻塞，等待当前事务释放锁），要么处于释放锁的阶段（已经获取了所有需要的资源）。</p>
+<p>因此，所有冲突的事务的执行顺序被它们的Lock Point决定，所有冲突事务Lock Point的顺序就是串行调度的顺序。</p>
+<h4 id="1-9-7-简述严格两段锁（S2PL），它和2PL有什么区别"><a href="#1-9-7-简述严格两段锁（S2PL），它和2PL有什么区别" class="headerlink" title="1.9.7 简述严格两段锁（S2PL），它和2PL有什么区别"></a>1.9.7 简述严格两段锁（S2PL），它和2PL有什么区别</h4><p><img src="/images/posts/S2PL.png" alt="S2PL"></p>
+<ol>
+<li>获取锁的阶段与2PL相同</li>
+<li>在事务结束后（提交或abort），释放所有的锁。</li>
+</ol>
+<p>其主要区别简单来说，就是在第二阶段：2PL能随时释放锁，S2PL只能在事务结束后释放锁。S2PL可以解决cascading abort问题。</p>
+<p><img src="/images/posts/S2PL_tbl.png" alt="S2PL_tbl"></p>
+<h4 id="1-9-8-简述三种封锁协议"><a href="#1-9-8-简述三种封锁协议" class="headerlink" title="1.9.8 简述三种封锁协议"></a>1.9.8 简述三种封锁协议</h4><p><strong>一级封锁协议</strong></p>
+<p>事务 T 要修改数据 A 时必须加 X 锁，直到 T 结束才释放锁。（解决丢失修改问题，但读操作不受限制，即使T获取X锁，其它事务照读不误）</p>
+<p><img src="/images/posts/1Lock.png" alt="1Lock"></p>
+<p><strong>二级封锁协议</strong></p>
+<p>在一级的基础上，要求读取数据 A 时必须加 S 锁，读取完马上释放 S 锁。（解决脏读问题）</p>
+<p><img src="/images/posts/2Lock.png" alt="2Lock"></p>
+<p><strong>三级封锁协议</strong></p>
+<p>在一级的基础上，要求读取数据 A 时必须加 S 锁，直到事务结束了才能释放 S 锁。（解决不可重复读问题）</p>
+<p><img src="C:\Users\jsjhf\Desktop\course\interview\img\3Lock.png" alt="3Lock"></p>
+<h4 id="1-9-9-简述事务的四种隔离级别，它们近似对应哪种封锁协议"><a href="#1-9-9-简述事务的四种隔离级别，它们近似对应哪种封锁协议" class="headerlink" title="1.9.9 简述事务的四种隔离级别，它们近似对应哪种封锁协议"></a>1.9.9 简述事务的四种隔离级别，它们近似对应哪种封锁协议</h4><p><img src="/images/posts/isolation_level.png" alt="isolation_level"></p>
+<p><strong>未提交读（READ UNCOMMITTED）</strong></p>
+<p>事务中的修改，即使没有提交，对其它事务也是可见的。(一级封锁）</p>
+<p><strong>提交读（READ COMMITTED）</strong></p>
+<p>一个事务只能读取已经提交的事务所做的修改。换句话说，一个事务所做的修改在提交之前对其它事务是不可见的。（二级封锁）</p>
+<p><strong>可重复读（REPEATABLE READ）</strong>（MySQL默认级别）</p>
+<p>保证在同一个事务中多次读取同一数据的结果是一样的。（三级封锁）</p>
+<p><strong>可串行化（SERIALIZABLE）</strong><br>强制事务串行执行，这样多个事务互不干扰，不会出现并发一致性问题。</p>
+<h4 id="1-9-10-什么是死锁预防，有哪些方法"><a href="#1-9-10-什么是死锁预防，有哪些方法" class="headerlink" title="1.9.10 什么是死锁预防，有哪些方法"></a>1.9.10 什么是死锁预防，有哪些方法</h4><p>在程序运行之前预防发生死锁。（针对产生原因，从根本上解决）</p>
+<ol>
+<li><p>破坏互斥条件<br>例如假脱机打印机技术允许若干个进程同时输出，唯一真正请求物理打印机的进程是打印机守护进程。</p>
+</li>
+<li><p>破坏占有和等待条件<br>一种实现方式是规定所有进程在开始执行前请求所需要的全部资源。</p>
+</li>
+<li><p>破坏不可抢占条件</p>
+</li>
+<li><p>破坏环路等待<br>给资源统一编号，进程只能按编号顺序来请求资源。</p>
+</li>
+</ol>
+<h4 id="1-9-11-什么是死锁避免，有哪些方法"><a href="#1-9-11-什么是死锁避免，有哪些方法" class="headerlink" title="1.9.11 什么是死锁避免，有哪些方法"></a>1.9.11 什么是死锁避免，有哪些方法</h4><p>在程序运行时，记录一些状态量，若判断某请求会使系统进入不安全状态，则拒绝请求，从而避免发生死锁。</p>
+<ol>
+<li><p>银行家算法</p>
+</li>
+<li><p>每个事务都给它一个时间戳，当A申请资源锁的时 候，B已经获得了锁，有以下两个策略</p>
+<ul>
+<li>wait-die(等待死亡)：是一种非剥夺策略，老的事务等待新的事务释放资源，即若A比B老，则等待B执行结束，否则A卷回(roll-back),一段时间后会以原先的时间戳继续申请。老的才有资格等，年轻的全部卷回。</li>
+<li>wound-wait(伤害-等待)：是一种剥夺策略，如果A比B年轻，A才等待，A比B老，则杀死B，B回滚。换句话说，老事务不等待”你”，直接杀死”你”，抢占资源，小孩子才等。</li>
+</ul>
+<p>两个方法都保证事务执行是单向的(要么老的等新的(等现存的持有锁的新事务结束，而不是说等所有新的事务申请结束了才执行老的)，要么新的等老的)，不会出现循环等待，从而避免了死锁，也都确保了老事务的优先权。</p>
+</li>
+</ol>
+<h4 id="1-9-12-什么是死锁检测，有哪些方法"><a href="#1-9-12-什么是死锁检测，有哪些方法" class="headerlink" title="1.9.12 什么是死锁检测，有哪些方法"></a>1.9.12 什么是死锁检测，有哪些方法</h4><p>不试图阻止死锁，而是当检测到死锁发生时，采取措施进行恢复。</p>
+<p>资源等待图，检测有无环路。</p>
+<h4 id="1-9-13-什么是死锁恢复，有哪些方法"><a href="#1-9-13-什么是死锁恢复，有哪些方法" class="headerlink" title="1.9.13 什么是死锁恢复，有哪些方法"></a>1.9.13 什么是死锁恢复，有哪些方法</h4><p>破除循环等待的局面</p>
+<ul>
+<li>利用抢占恢复</li>
+<li>利用回滚恢复</li>
+<li>通过杀死进程恢复</li>
+</ul>
+<h4 id="1-9-14-简述封锁粒度"><a href="#1-9-14-简述封锁粒度" class="headerlink" title="1.9.14 简述封锁粒度"></a>1.9.14 简述封锁粒度</h4><p>MySQL 中提供了两种封锁粒度：行级锁以及表级锁。</p>
+<p>应该尽量只锁定需要修改的那部分数据，而不是所有的资源。锁定的数据量越少，发生锁争用的可能就越小，系统的并发程度就越高。</p>
+<p>但是加锁需要消耗资源，锁的各种操作（包括获取锁、释放锁、以及检查锁状态）都会增加系统开销。因此封锁粒度越小，系统开销就越大。</p>
+<p>在选择封锁粒度时，需要在锁开销和并发程度之间做一个权衡。</p>
+<h4 id="1-9-15-简述封锁的类型"><a href="#1-9-15-简述封锁的类型" class="headerlink" title="1.9.15 简述封锁的类型"></a>1.9.15 简述封锁的类型</h4><p><strong>读写锁</strong></p>
+<ul>
+<li>互斥锁（Exclusive），简写为 X 锁，又称写锁。</li>
+<li>共享锁（Shared），简写为 S 锁，又称读锁。</li>
+</ul>
+<p>有以下两个规定：</p>
+<ul>
+<li>一个事务对数据对象 A 加了 X 锁，就可以对 A 进行读取和更新。加锁期间其它事务不能对 A 加任何锁。</li>
+<li>一个事务对数据对象 A 加了 S 锁，可以对 A 进行读取操作，但是不能进行更新操作。加锁期间其它事务能对 A 加 S 锁，但是不能加 X 锁。</li>
+</ul>
+<p>锁的兼容关系如下：</p>
+<p><img src="/images/posts/XS.png" alt="XS"></p>
+<p><strong>意向锁</strong></p>
+<p>使用意向锁（Intention Locks）可以更容易地支持多粒度封锁。</p>
+<p>在存在行级锁和表级锁的情况下，事务 T 想要对表 A 加 X 锁，就需要先检测是否有其它事务对表 A 或者表 A 中的任意一行加了锁，那么就需要对表 A 的每一行都检测一次，这是非常耗时的。</p>
+<p>意向锁在原来的 X/S 锁之上引入了 IX/IS，IX/IS 都是表锁，用来表示一个事务想要在表中的某个数据行上加 X 锁或 S 锁。有以下两个规定：</p>
+<ul>
+<li>一个事务在获得某个数据行对象的 S 锁之前，必须先获得表的 IS 锁或者更强的锁；</li>
+<li>一个事务在获得某个数据行对象的 X 锁之前，必须先获得表的 IX 锁。</li>
+</ul>
+<p>通过引入意向锁，事务 T 想要对表 A 加 X 锁，只需要先检测是否有其它事务对表 A 加了 X/IX/S/IS 锁，如果加了就表示有其它事务正在使用这个表或者表中某一行的锁，因此事务 T 加 X 锁失败。</p>
+<p>各种锁的兼容关系如下：</p>
+<p><img src="/images/posts/IXS.png" alt="IXS"></p>
+<p>解释如下：</p>
+<ul>
+<li>任意 IS/IX 锁之间都是兼容的，因为它们只表示想要对表加锁，而不是真正加锁；</li>
+<li>这里兼容关系针对的是表级锁，而表级的 IX 锁和行级的 X 锁兼容，两个事务可以对两个数据行加 X 锁。（事务 T1想要对数据行R1加 X 锁，事务T2 想要对同一个表的数据行R2加 X 锁，两个事务都需要对该表加 IX 锁，但是 IX 锁是兼容的，并且 IX 锁与行级的 X 锁也是兼容的，因此两个事务都能加锁成功，对同一个表中的两个数据行做修改。）</li>
+</ul>
+<h4 id="1-9-16-分布式系统有什么特点"><a href="#1-9-16-分布式系统有什么特点" class="headerlink" title="1.9.16 分布式系统有什么特点"></a>1.9.16 分布式系统有什么特点</h4><ol>
+<li>支持并行计算</li>
+<li>不共享存储</li>
+<li>网络可能不可靠：延迟、失序、丢包</li>
+<li>时钟不同步</li>
+<li>部分宕机</li>
+</ol>
+<p>简单来说，就是当某台你不知道的计算机宕机了，它可能会导致你自己的计算机不能工作。</p>
+<h4 id="1-9-17-什么是分布式事务"><a href="#1-9-17-什么是分布式事务" class="headerlink" title="1.9.17 什么是分布式事务"></a>1.9.17 什么是分布式事务</h4><p>在分布式数据库系统中，一个事务可能要访问多个节点。分布式事务用于在分布式系统中保证不同节点间的数据一致性。</p>
+<p>举例：电商应用中，存在订单DB和库存DB。当交易成功时，需要在订单DB中创建新订单，同时在库存DB中减少库存。两个操作必须放在一个事务中，而这两个数据库又是分布式的，因此这是一个分布式事务。</p>
+<h4 id="1-9-18-分布式事务中如何上锁，如何检测死锁"><a href="#1-9-18-分布式事务中如何上锁，如何检测死锁" class="headerlink" title="1.9.18 分布式事务中如何上锁，如何检测死锁"></a>1.9.18 分布式事务中如何上锁，如何检测死锁</h4><p><img src="/images/posts/distributed_locking.png" alt="distributed_locking"></p>
+<p>每个节点像非分布式事务一样单独上锁。</p>
+<p>检测死锁：周期性地在指定的master节点处合并每个节点的资源等待图，检测全局的死锁。</p>
+<h4 id="1-9-19-简述二阶段提交（2PC）的过程，如果还要记录日志呢"><a href="#1-9-19-简述二阶段提交（2PC）的过程，如果还要记录日志呢" class="headerlink" title="1.9.19 简述二阶段提交（2PC）的过程，如果还要记录日志呢"></a>1.9.19 简述二阶段提交（2PC）的过程，如果还要记录日志呢</h4><p><strong>二阶段提交是一种强一致性设计</strong>，2PC 引入一个事务协调者的角色来协调管理各参与者（也可称之为各本地资源）的提交和回滚，二阶段分别指的是准备（投票）和提交两个阶段。</p>
+<p>阶段一：</p>
+<p>协调者向所有参与者发出“准备”的命令：</p>
+<p><img src="/images/posts/2PC_0.png" alt="2PC_0"></p>
+<p><img src="/images/posts/2PC_1.png" alt="2PC_1"></p>
+<p>每个参与者需要向协调者回复“Yes”还是”No”的投票：</p>
+<p><img src="/images/posts/2PC_2.png" alt="2PC_2"></p>
+<p><img src="/images/posts/2Pc_3.png" alt="2Pc_3"></p>
+<p>阶段二：</p>
+<p>协调者向参与者广播投票的结果（提交还是回滚）：</p>
+<p><img src="/images/posts/2PC_4.png" alt="2PC_4"></p>
+<p><img src="/images/posts/2PC_5.png" alt="2PC_5"></p>
+<p>参与者向协调者回复Ack信息：</p>
+<p><img src="/images/posts/2PC_6.png" alt="2PC_6"></p>
+<p><img src="/images/posts/2PC_7.png" alt="2PC_7"></p>
+<p><strong>2PC with Logging：</strong></p>
+<p>阶段一：</p>
+<ol>
+<li>协调者发布prepare的命令</li>
+<li>参与者产生prepare/abort的日志</li>
+<li>参与者强制将prepare/abort的日志刷入磁盘</li>
+<li>参与者回复Yes/No的投票</li>
+<li>协调者产生commit的日志</li>
+<li>协调者强制将commit的日志刷入磁盘</li>
+</ol>
+<p>阶段二：</p>
+<ol>
+<li>协调者广播投票结果</li>
+<li>协调者产生commit/abort的日志</li>
+<li>协调者强制将commit/abort的日志刷入磁盘</li>
+<li>协调者回复Ack</li>
+<li>协调者产生end日志</li>
+<li>协调者强制将end日志刷入磁盘</li>
+</ol>
+<p><strong>总结：</strong></p>
+<p><img src="/images/posts/2PC_work.png" alt="2PC_work"></p>
+<h3 id="1-10-恢复"><a href="#1-10-恢复" class="headerlink" title="1.10 恢复"></a>1.10 恢复</h3><h4 id="1-10-1-什么是预写式日志（Write-Ahead-Logging-WAL）"><a href="#1-10-1-什么是预写式日志（Write-Ahead-Logging-WAL）" class="headerlink" title="1.10.1 什么是预写式日志（Write-Ahead Logging, WAL）"></a>1.10.1 什么是预写式日志（Write-Ahead Logging, WAL）</h4><ol>
+<li><p>在数据页刷入磁盘之前，强制所有关于此页的update操作的日志记录刷入磁盘。</p>
+<p>（即UNDO日志，保证原子性）</p>
+</li>
+<li><p>在事务提交之前，强制所有关于此事务的操作的日志记录从日志缓冲区刷到入磁盘。</p>
+<p>（即REDO日志，保证持久性）</p>
+</li>
+</ol>
+<h4 id="1-10-2-简述ARIES恢复算法的具体流程"><a href="#1-10-2-简述ARIES恢复算法的具体流程" class="headerlink" title="1.10.2 简述ARIES恢复算法的具体流程"></a>1.10.2 简述ARIES恢复算法的具体流程</h4><p><strong>1-几种LSN</strong></p>
+<p>LSN：Log Sequence Number，日志序列号，单调递增</p>
+<p>除了磁盘中存储的日志有LSN以外，其它的LSN：</p>
+<ol>
+<li><p>flushedLSN：RAM中当前被跟踪的LSN，表示当前时间</p>
+<p><img src="/images/posts/LSN.png" alt="LSN"></p>
+</li>
+<li><p>pageLSN：磁盘中数据页的LSN，表示最近一次更改这个页的时间。由于WAL的存在，保证了pageLSN &lt;= flushedLSN。</p>
+</li>
+<li><p>prevLSN：在日志记录LSN中，追踪被当前事务XID写的前一个LSN。便于对事务进行UNDO。</p>
+<p><img src="/images/posts/prervLSN.png" alt="prervLSN"></p>
+</li>
+</ol>
+<p><strong>2-日志记录的格式与种类</strong></p>
+<p><img src="/images/posts/log_format.png" alt="log_format"></p>
+<p>种类：</p>
+<ol>
+<li>UPDATE：包含足够的信息用于REDO或UNDO</li>
+<li>COMMIT：事务提交时，先写提交日志</li>
+<li>ABORT：事务被中断</li>
+<li>CHECKPOINT：设置检查点，把RAM中的脏页刷新到磁盘（不一定全部刷新），利于缩短恢复时间，空出缓冲区</li>
+<li>compensation log record (CLR)</li>
+<li>END：事务提交成功（返回）后，写入结束日志</li>
+</ol>
+<p><strong>3-日志状态记录</strong></p>
+<p><img src="/images/posts/log_status.png" alt="log_status"></p>
+<p>使用两张表来记录任一时刻事务和RAM中页的状态。</p>
+<p><strong>事务表</strong>：记录所有未提交（运行中）、正在提交（提交还未成功返回）和正在终止的事务的状态。</p>
+<p>包含：</p>
+<ol>
+<li>XID：事务编号</li>
+<li>Status：状态（running, committing, aborting）</li>
+<li>lastLSN：被此事务写的最近一次的LSN</li>
+</ol>
+<p><strong>脏页表（DPT）</strong>：记录所有脏页的信息</p>
+<p>包含：</p>
+<ol>
+<li>PageID：在磁盘中的页面号</li>
+<li>recLSN：第一个导致该页变脏的LSN</li>
+</ol>
+<p><strong>4-事务的正常执行流</strong></p>
+<ol>
+<li>使用WAL机制</li>
+<li>RAM中的页被更新后，要增加pageLSN</li>
+<li>每一步过后都要更新事务表和DPT</li>
+<li>日志被周期性地刷入磁盘</li>
+</ol>
+<p><strong>5-事务的提交</strong></p>
+<ol>
+<li>先写入COMMIT日志</li>
+<li>之前的所有日志都被强制刷新到磁盘上，保证flushedLSN&gt;=lastLSN</li>
+<li>commit()返回</li>
+<li>写入END日志</li>
+</ol>
+<p><strong>6-事务的终止</strong></p>
+<p>需要UNDO该事务造成的update。</p>
+<ol>
+<li><p>从事务表中找出该事务的lastLSN</p>
+</li>
+<li><p>在回滚前，写入ABORT日志</p>
+</li>
+<li><p>利用prevLSN，倒序undo该事务做过的所有update操作。每次成功的undo了一个操作，就写入一个CLR日志。</p>
+<p>CLR中含有undonextLSN字段，指向下一个被undo的LSN。</p>
+<p>CLR中含有REDO所需的信息，因为CLR日志可能会被REDO，但是绝不会被UNDO。</p>
+</li>
+<li><p>所有undo操作完成后，写入END日志。</p>
+</li>
+</ol>
+<p><strong>7-CHECKPOINT</strong></p>
+<p>日志不能无限制的存储下去，DBMS会周期性地创建chkpt，减小崩溃后的恢复时间，空出缓冲区，减小日志存储量。</p>
+<ol>
+<li>写入begin_checkpoint日志：表明下面开始创建检查点</li>
+<li>把RAM中的脏页刷新到磁盘（不一定全部刷新）</li>
+<li>写入end_checkpoint日志：内含当前的事务表和DPT（即当前检查点处的数据库状态）</li>
+</ol>
+<p>需要把最近一次checkpoint的LSN放置在一个安全的位置（master record）。</p>
+<p><strong>8-崩溃后的恢复过程</strong></p>
+<p>无论数据库是否崩溃，在开启时都会自动执行恢复过程。</p>
+<p><img src="/images/posts/recovery.png" alt="recovery"></p>
+<p>从最近一次的chkpt开始恢复，分为以下三个阶段：</p>
+<ol>
+<li><strong>分析阶段</strong>：复现出在数据库崩溃时，哪些事务没能成功提交，那些页可能没被同步到磁盘中。</li>
+<li><strong>REDO阶段</strong>：从最早引起脏页的那个LSN处，重做所有之后的操作</li>
+<li><strong>UNDO阶段</strong>：对于每个未成功提交的事务，回滚所有操作（与事务终止相同）</li>
+</ol>
+<p><strong>9-分析阶段</strong></p>
+<ol>
+<li>获取最近一次检查点处数据库的状态：事务表和DPT</li>
+<li>从检查点后的日志开始往后扫描：<ol>
+<li>遇到END：将此事务从事务表中移除</li>
+<li>遇到UPDATE：若此页不在DPT中，则把它加入到DPT中，更新resLSN为此时的LSN。这就是最早引起脏页的LSN。我们还不能确定崩溃时此页到底有没有被同步到磁盘中。</li>
+<li>遇到其余日志：把此事务加入到事务表中，更新lastLSN为此时的LSN。若遇到COMMIT，则把事务状态改为提交中。</li>
+</ol>
+</li>
+</ol>
+<p>分析阶段结束后：</p>
+<ol>
+<li>对所有处于提交中状态的事务：写入END日志，然后把它们从事务表中移除。因为这些事务已经进行了提交，必须确保它们的持久性。</li>
+<li>事务表中剩余的事务：Losers! 它们在数据库崩溃时，没能进入提交这一步，需要被回滚。</li>
+<li>DPT中的脏页：这些脏页有可能没来得及被同步到磁盘中。</li>
+</ol>
+<p><strong>10-REDO阶段</strong></p>
+<p>从DPT中最早的那个recLSN处开始，重做所有之后的update操作，包括CLR。同时需要相应的更新pageLSN。</p>
+<p>REDO阶段不需要记录任何日志。</p>
+<p>对于每个update日志，有几种不需要REDO的情况：</p>
+<ol>
+<li>update的页不再DPT中：因为此页在chkpt之前已经被同步到磁盘中，被从DPT中移除了</li>
+<li>update的页在DPT中，但是它的recLSN大于update的LSN：此页在chkpt之前被同步到磁盘中，被从DPT中移除。之后又被取出，加入到了DPT中。我们可以确定这次的update操作确实将内容同步到了磁盘上。</li>
+<li>pageLSN&gt;=LSN：说明此页在这个update操作之后又被update过，且将内容同步到了磁盘上。</li>
+</ol>
+<p><strong>11-UNDO阶段</strong></p>
+<p>对于每个事务表中的事务，执行回滚操作即可。（步骤同终止的情况）</p>
+<h4 id="1-10-3-数据库在恢复过程中又崩溃了，上述步骤能保证正确性吗"><a href="#1-10-3-数据库在恢复过程中又崩溃了，上述步骤能保证正确性吗" class="headerlink" title="1.10.3 数据库在恢复过程中又崩溃了，上述步骤能保证正确性吗"></a>1.10.3 数据库在恢复过程中又崩溃了，上述步骤能保证正确性吗</h4><p><strong>分析阶段崩溃：</strong></p>
+<p>只是失去了一些状态量。下次重启时再分析一遍。</p>
+<p><strong>REDO阶段崩溃：</strong></p>
+<p>做过的REDO在下次重启时的分析阶段会被检测出来，然后继续执行剩余的REDO。</p>
+<p><strong>UNDO阶段崩溃：</strong></p>
+<p>由于每次UNDO一个update都会写入一个CLR，CLR中的nextundoLSN指向了下一个需要UNDO的操作。因此不会出现已经被UNDO的操作又被UNDO的局面。</p>
+<h4 id="1-10-4-如何限制REDO与UNDO日志的数量"><a href="#1-10-4-如何限制REDO与UNDO日志的数量" class="headerlink" title="1.10.4 如何限制REDO与UNDO日志的数量"></a>1.10.4 如何限制REDO与UNDO日志的数量</h4><p>REDO：周期性地同步RAM和磁盘，周期性地设置检查点</p>
+<p>UNDO：避免使用过长的事务</p>
+<h3 id="1-11-复制"><a href="#1-11-复制" class="headerlink" title="1.11 复制"></a>1.11 复制</h3><h3 id="1-12-NoSQL"><a href="#1-12-NoSQL" class="headerlink" title="1.12 NoSQL"></a>1.12 NoSQL</h3><h3 id="1-13-大数据"><a href="#1-13-大数据" class="headerlink" title="1.13 大数据"></a>1.13 大数据</h3><h2 id="2-InnoDB存储引擎"><a href="#2-InnoDB存储引擎" class="headerlink" title="2 InnoDB存储引擎"></a>2 InnoDB存储引擎</h2><h3 id="2-1-基础"><a href="#2-1-基础" class="headerlink" title="2.1 基础"></a>2.1 基础</h3><h3 id="2-2-文件"><a href="#2-2-文件" class="headerlink" title="2.2 文件"></a>2.2 文件</h3><h3 id="2-3-表"><a href="#2-3-表" class="headerlink" title="2.3 表"></a>2.3 表</h3><h3 id="2-4-索引"><a href="#2-4-索引" class="headerlink" title="2.4 索引"></a>2.4 索引</h3><h3 id="2-5-锁"><a href="#2-5-锁" class="headerlink" title="2.5 锁"></a>2.5 锁</h3><h3 id="2-6-事务"><a href="#2-6-事务" class="headerlink" title="2.6 事务"></a>2.6 事务</h3><h3 id="2-7-备份与恢复"><a href="#2-7-备份与恢复" class="headerlink" title="2.7 备份与恢复"></a>2.7 备份与恢复</h3><h3 id="2-8-性能优化"><a href="#2-8-性能优化" class="headerlink" title="2.8 性能优化"></a>2.8 性能优化</h3><h2 id="3-SQL语言"><a href="#3-SQL语言" class="headerlink" title="3 SQL语言"></a>3 SQL语言</h2><p>Reference:</p>
+<ol>
+<li>UC Berkeley CS186 Introduction to Database Systems</li>
+<li>《Database System Concepts》- Abraham Silberschatz …</li>
+<li>《MySQL技术内幕：InnoDB存储引擎》 - 姜承尧</li>
+<li> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/leetbook/detail/database-handbook/">数据库知识手册</a></li>
+</ol>
+</div><hr style="height:1px;margin:1rem 0"></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2021/12/19/2021-12-19-algorithms-notes-overview/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">算法笔记整理</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2021/04/26/2021-04-26-interview-C++/"><span class="level-item">面试-C++</span><i class="level-item fas fa-chevron-right"></i></a></div></nav></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/images/avatar.jpg" alt="Felix Feng"></figure><p class="title is-size-4 is-block" style="font-weight: bold">Felix Feng</p><p class="is-size-6 is-block" style="margin-top: 1rem">jsjhfx@163.com</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Xi&#039;an, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading" style="font-weight: bold">Posts</p><a href="/archives"><p class="title">19</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading" style="font-weight: bold">Categories</p><a href="/categories"><p class="title">3</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading" style="font-weight: bold">Tags</p><a href="/tags"><p class="title">13</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/2horse9sun" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/2horse9sun"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="is-4-tablet is-4-desktop is-3-widescreen  is-sticky" style="margin-top: 1.5rem"> <div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#1-数据库系统基础"><span class="level-left"><span class="level-item">1 数据库系统基础</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-0-简述一个DBMS的一般架构"><span class="level-left"><span class="level-item">1.0 简述一个DBMS的一般架构</span></span></a></li><li><a class="level is-mobile" href="#1-1-磁盘与文件"><span class="level-left"><span class="level-item">1.1 磁盘与文件</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-1-1-简述磁盘操作的特点"><span class="level-left"><span class="level-item">1.1.1 简述磁盘操作的特点</span></span></a></li><li><a class="level is-mobile" href="#1-1-2-简述计算机中的存储层级结构"><span class="level-left"><span class="level-item">1.1.2 简述计算机中的存储层级结构</span></span></a></li><li><a class="level is-mobile" href="#1-1-3-简述磁盘的结构，如何计算磁盘容量"><span class="level-left"><span class="level-item">1.1.3 简述磁盘的结构，如何计算磁盘容量</span></span></a></li><li><a class="level is-mobile" href="#1-1-4-如何计算磁盘访问时间"><span class="level-left"><span class="level-item">1.1.4 如何计算磁盘访问时间</span></span></a></li><li><a class="level is-mobile" href="#1-1-5-DBMS体系结构中磁盘空间管理器的作用是什么"><span class="level-left"><span class="level-item">1.1.5 DBMS体系结构中磁盘空间管理器的作用是什么</span></span></a></li><li><a class="level is-mobile" href="#1-1-6-数据库如何实现一个磁盘空间管理器"><span class="level-left"><span class="level-item">1.1.6 数据库如何实现一个磁盘空间管理器</span></span></a></li><li><a class="level is-mobile" href="#1-1-7-数据库的表、文件、页、记录之间的关系"><span class="level-left"><span class="level-item">1.1.7 数据库的表、文件、页、记录之间的关系</span></span></a></li><li><a class="level is-mobile" href="#1-1-8-有哪些数据库文件组织结构"><span class="level-left"><span class="level-item">1.1.8 有哪些数据库文件组织结构</span></span></a></li><li><a class="level is-mobile" href="#1-1-9-如何实现一个堆组织文件"><span class="level-left"><span class="level-item">1.1.9 如何实现一个堆组织文件</span></span></a></li><li><a class="level is-mobile" href="#1-1-10-简述数据页的结构"><span class="level-left"><span class="level-item">1.1.10 简述数据页的结构</span></span></a></li><li><a class="level is-mobile" href="#1-1-11-简述变长记录-VLR-的格式"><span class="level-left"><span class="level-item">1.1.11 简述变长记录(VLR)的格式</span></span></a></li><li><a class="level is-mobile" href="#1-1-12-对堆组织文件和有序组织文件进行各种操作的时间是多少"><span class="level-left"><span class="level-item">1.1.12 对堆组织文件和有序组织文件进行各种操作的时间是多少</span></span></a></li></ul></li><li><a class="level is-mobile" href="#1-2-索引管理"><span class="level-left"><span class="level-item">1.2 索引管理</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-2-1-什么是索引，有哪些索引结构"><span class="level-left"><span class="level-item">1.2.1 什么是索引，有哪些索引结构</span></span></a></li><li><a class="level is-mobile" href="#1-2-2-简述B-Tree的结构"><span class="level-left"><span class="level-item">1.2.2 简述B+ Tree的结构</span></span></a></li><li><a class="level is-mobile" href="#1-2-3-使用索引时，数据项有几种存放方式"><span class="level-left"><span class="level-item">1.2.3 使用索引时，数据项有几种存放方式</span></span></a></li><li><a class="level is-mobile" href="#1-2-4-聚集索引和非聚集索引的区别"><span class="level-left"><span class="level-item">1.2.4 聚集索引和非聚集索引的区别</span></span></a></li><li><a class="level is-mobile" href="#1-2-5-对堆组织文件、有序组织文件和聚集索引文件进行各种操作的时间是多少"><span class="level-left"><span class="level-item">1.2.5 对堆组织文件、有序组织文件和聚集索引文件进行各种操作的时间是多少</span></span></a></li></ul></li><li><a class="level is-mobile" href="#1-3-缓冲区管理"><span class="level-left"><span class="level-item">1.3 缓冲区管理</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-3-1-简述缓冲区的工作流程"><span class="level-left"><span class="level-item">1.3.1 简述缓冲区的工作流程</span></span></a></li><li><a class="level is-mobile" href="#1-3-2-缓冲区的页有哪些状态字段"><span class="level-left"><span class="level-item">1.3.2 缓冲区的页有哪些状态字段</span></span></a></li><li><a class="level is-mobile" href="#1-3-3-简述缓冲区的几种替换策略"><span class="level-left"><span class="level-item">1.3.3 简述缓冲区的几种替换策略</span></span></a></li><li><a class="level is-mobile" href="#1-3-4-为什么DBMS不使用OS自带的页面高速缓存功能"><span class="level-left"><span class="level-item">1.3.4 为什么DBMS不使用OS自带的页面高速缓存功能</span></span></a></li></ul></li><li><a class="level is-mobile" href="#1-4-表连接"><span class="level-left"><span class="level-item">1.4 表连接</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-4-1-什么时候数据库记录需要排序"><span class="level-left"><span class="level-item">1.4.1 什么时候数据库记录需要排序</span></span></a></li><li><a class="level is-mobile" href="#1-4-2-什么是外部排序，具体原理是什么"><span class="level-left"><span class="level-item">1.4.2 什么是外部排序，具体原理是什么</span></span></a></li><li><a class="level is-mobile" href="#1-4-3-什么时候数据库记录需要进行hash操作"><span class="level-left"><span class="level-item">1.4.3 什么时候数据库记录需要进行hash操作</span></span></a></li><li><a class="level is-mobile" href="#1-4-4-什么是外部hashing，具体原理是什么"><span class="level-left"><span class="level-item">1.4.4 什么是外部hashing，具体原理是什么</span></span></a></li><li><a class="level is-mobile" href="#1-4-5-sorting和hashing各自的优点"><span class="level-left"><span class="level-item">1.4.5 sorting和hashing各自的优点</span></span></a></li><li><a class="level is-mobile" href="#1-4-6-简述数据库查询语言如何转化成对数据的具体操作"><span class="level-left"><span class="level-item">1.4.6 简述数据库查询语言如何转化成对数据的具体操作</span></span></a></li><li><a class="level is-mobile" href="#1-4-7-什么是Simple-Nested-Loops-Join-SNLJ"><span class="level-left"><span class="level-item">1.4.7 什么是Simple Nested Loops Join (SNLJ)</span></span></a></li><li><a class="level is-mobile" href="#1-4-8-什么是Page-Nested-Loop-Join-PNLJ"><span class="level-left"><span class="level-item">1.4.8 什么是Page Nested Loop Join (PNLJ)</span></span></a></li><li><a class="level is-mobile" href="#1-4-9-什么是Block-Nested-Loop-Join-BNLJ"><span class="level-left"><span class="level-item">1.4.9 什么是Block Nested Loop Join (BNLJ)</span></span></a></li><li><a class="level is-mobile" href="#1-4-10-什么是Index-Nested-Loop-Join-INLJ"><span class="level-left"><span class="level-item">1.4.10 什么是Index Nested Loop Join (INLJ)</span></span></a></li><li><a class="level is-mobile" href="#1-4-11-什么是Sort-Merge-Join-SMJ"><span class="level-left"><span class="level-item">1.4.11 什么是Sort-Merge Join (SMJ)</span></span></a></li><li><a class="level is-mobile" href="#1-4-12-什么是Grace-Hash-Join-GHJ"><span class="level-left"><span class="level-item">1.4.12 什么是Grace Hash Join (GHJ)</span></span></a></li><li><a class="level is-mobile" href="#1-4-13-对比SMJ和GHJ"><span class="level-left"><span class="level-item">1.4.13 对比SMJ和GHJ</span></span></a></li></ul></li><li><a class="level is-mobile" href="#1-5-并行化"><span class="level-left"><span class="level-item">1.5 并行化</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-5-1-简述数据库查询并行方式的分类"><span class="level-left"><span class="level-item">1.5.1 简述数据库查询并行方式的分类</span></span></a></li><li><a class="level is-mobile" href="#1-5-2-有哪些并行化架构"><span class="level-left"><span class="level-item">1.5.2 有哪些并行化架构</span></span></a></li><li><a class="level is-mobile" href="#1-5-3-把数据表分发到多台机器-磁盘上的几种方式-Data-Partitioning"><span class="level-left"><span class="level-item">1.5.3 把数据表分发到多台机器/磁盘上的几种方式(Data Partitioning)</span></span></a></li><li><a class="level is-mobile" href="#1-5-4-根据范围进行分组时，如何使每台机器上分发到的数据量基本相同"><span class="level-left"><span class="level-item">1.5.4 根据范围进行分组时，如何使每台机器上分发到的数据量基本相同</span></span></a></li><li><a class="level is-mobile" href="#1-5-5-简述如何实现并行化sorting和hashing"><span class="level-left"><span class="level-item">1.5.5 简述如何实现并行化sorting和hashing</span></span></a></li><li><a class="level is-mobile" href="#1-5-6-简述如何实现并行化SMJ和GHJ"><span class="level-left"><span class="level-item">1.5.6 简述如何实现并行化SMJ和GHJ</span></span></a></li></ul></li><li><a class="level is-mobile" href="#1-6-查询优化（基于System-R-Selinger-Optimizer）"><span class="level-left"><span class="level-item">1.6 查询优化（基于System R / Selinger Optimizer）</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-6-1-简述查询分析和优化的流程"><span class="level-left"><span class="level-item">1.6.1 简述查询分析和优化的流程</span></span></a></li><li><a class="level is-mobile" href="#1-6-2-简述优化器的工作原理和目标"><span class="level-left"><span class="level-item">1.6.2 简述优化器的工作原理和目标</span></span></a></li><li><a class="level is-mobile" href="#1-6-3-简述几种常见的优化策略"><span class="level-left"><span class="level-item">1.6.3 简述几种常见的优化策略</span></span></a></li><li><a class="level is-mobile" href="#1-6-4-如何确定plan-space"><span class="level-left"><span class="level-item">1.6.4 如何确定plan space</span></span></a></li><li><a class="level is-mobile" href="#1-6-5-如何获取cost-estimation"><span class="level-left"><span class="level-item">1.6.5 如何获取cost  estimation</span></span></a></li><li><a class="level is-mobile" href="#1-6-6-如何选择Search-strategy"><span class="level-left"><span class="level-item">1.6.6 如何选择Search strategy</span></span></a></li></ul></li><li><a class="level is-mobile" href="#1-7-实体关系模型"><span class="level-left"><span class="level-item">1.7 实体关系模型</span></span></a></li><li><a class="level is-mobile" href="#1-8-函数依赖与规整化"><span class="level-left"><span class="level-item">1.8 函数依赖与规整化</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-8-1-数据冗余会造成什么后果"><span class="level-left"><span class="level-item">1.8.1 数据冗余会造成什么后果</span></span></a></li><li><a class="level is-mobile" href="#1-8-2-函数依赖在数据库表结构设计中有什么作用"><span class="level-left"><span class="level-item">1.8.2 函数依赖在数据库表结构设计中有什么作用</span></span></a></li><li><a class="level is-mobile" href="#1-8-3-一般如何改进表结构设计"><span class="level-left"><span class="level-item">1.8.3 一般如何改进表结构设计</span></span></a></li><li><a class="level is-mobile" href="#1-8-4-什么是函数依赖X-gt-Y"><span class="level-left"><span class="level-item">1.8.4 什么是函数依赖X-&gt;Y</span></span></a></li><li><a class="level is-mobile" href="#1-8-5-简述超级键、候选键和主键的区别"><span class="level-left"><span class="level-item">1.8.5 简述超级键、候选键和主键的区别</span></span></a></li><li><a class="level is-mobile" href="#1-8-6-简述数据冗余产生的原因（举例）"><span class="level-left"><span class="level-item">1.8.6 简述数据冗余产生的原因（举例）</span></span></a></li><li><a class="level is-mobile" href="#1-8-7-简述数据库的范式"><span class="level-left"><span class="level-item">1.8.7 简述数据库的范式</span></span></a></li></ul></li><li><a class="level is-mobile" href="#1-9-事务"><span class="level-left"><span class="level-item">1.9 事务</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-9-1-简述有哪些并发一致性问题"><span class="level-left"><span class="level-item">1.9.1 简述有哪些并发一致性问题</span></span></a></li><li><a class="level is-mobile" href="#1-9-2-简述事务的ACID四大性质"><span class="level-left"><span class="level-item">1.9.2 简述事务的ACID四大性质</span></span></a></li><li><a class="level is-mobile" href="#1-9-3-事务ACID性质之间的关系"><span class="level-left"><span class="level-item">1.9.3 事务ACID性质之间的关系</span></span></a></li><li><a class="level is-mobile" href="#1-9-4-简述串行化、可串行化、冲突可串行化几种调度方式的区别"><span class="level-left"><span class="level-item">1.9.4 简述串行化、可串行化、冲突可串行化几种调度方式的区别</span></span></a></li><li><a class="level is-mobile" href="#1-9-5-简述两段锁协议-2PL"><span class="level-left"><span class="level-item">1.9.5 简述两段锁协议(2PL)</span></span></a></li><li><a class="level is-mobile" href="#1-9-6-为什么2PL一定可以保证冲突可串行化"><span class="level-left"><span class="level-item">1.9.6 为什么2PL一定可以保证冲突可串行化</span></span></a></li><li><a class="level is-mobile" href="#1-9-7-简述严格两段锁（S2PL），它和2PL有什么区别"><span class="level-left"><span class="level-item">1.9.7 简述严格两段锁（S2PL），它和2PL有什么区别</span></span></a></li><li><a class="level is-mobile" href="#1-9-8-简述三种封锁协议"><span class="level-left"><span class="level-item">1.9.8 简述三种封锁协议</span></span></a></li><li><a class="level is-mobile" href="#1-9-9-简述事务的四种隔离级别，它们近似对应哪种封锁协议"><span class="level-left"><span class="level-item">1.9.9 简述事务的四种隔离级别，它们近似对应哪种封锁协议</span></span></a></li><li><a class="level is-mobile" href="#1-9-10-什么是死锁预防，有哪些方法"><span class="level-left"><span class="level-item">1.9.10 什么是死锁预防，有哪些方法</span></span></a></li><li><a class="level is-mobile" href="#1-9-11-什么是死锁避免，有哪些方法"><span class="level-left"><span class="level-item">1.9.11 什么是死锁避免，有哪些方法</span></span></a></li><li><a class="level is-mobile" href="#1-9-12-什么是死锁检测，有哪些方法"><span class="level-left"><span class="level-item">1.9.12 什么是死锁检测，有哪些方法</span></span></a></li><li><a class="level is-mobile" href="#1-9-13-什么是死锁恢复，有哪些方法"><span class="level-left"><span class="level-item">1.9.13 什么是死锁恢复，有哪些方法</span></span></a></li><li><a class="level is-mobile" href="#1-9-14-简述封锁粒度"><span class="level-left"><span class="level-item">1.9.14 简述封锁粒度</span></span></a></li><li><a class="level is-mobile" href="#1-9-15-简述封锁的类型"><span class="level-left"><span class="level-item">1.9.15 简述封锁的类型</span></span></a></li><li><a class="level is-mobile" href="#1-9-16-分布式系统有什么特点"><span class="level-left"><span class="level-item">1.9.16 分布式系统有什么特点</span></span></a></li><li><a class="level is-mobile" href="#1-9-17-什么是分布式事务"><span class="level-left"><span class="level-item">1.9.17 什么是分布式事务</span></span></a></li><li><a class="level is-mobile" href="#1-9-18-分布式事务中如何上锁，如何检测死锁"><span class="level-left"><span class="level-item">1.9.18 分布式事务中如何上锁，如何检测死锁</span></span></a></li><li><a class="level is-mobile" href="#1-9-19-简述二阶段提交（2PC）的过程，如果还要记录日志呢"><span class="level-left"><span class="level-item">1.9.19 简述二阶段提交（2PC）的过程，如果还要记录日志呢</span></span></a></li></ul></li><li><a class="level is-mobile" href="#1-10-恢复"><span class="level-left"><span class="level-item">1.10 恢复</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-10-1-什么是预写式日志（Write-Ahead-Logging-WAL）"><span class="level-left"><span class="level-item">1.10.1 什么是预写式日志（Write-Ahead Logging, WAL）</span></span></a></li><li><a class="level is-mobile" href="#1-10-2-简述ARIES恢复算法的具体流程"><span class="level-left"><span class="level-item">1.10.2 简述ARIES恢复算法的具体流程</span></span></a></li><li><a class="level is-mobile" href="#1-10-3-数据库在恢复过程中又崩溃了，上述步骤能保证正确性吗"><span class="level-left"><span class="level-item">1.10.3 数据库在恢复过程中又崩溃了，上述步骤能保证正确性吗</span></span></a></li><li><a class="level is-mobile" href="#1-10-4-如何限制REDO与UNDO日志的数量"><span class="level-left"><span class="level-item">1.10.4 如何限制REDO与UNDO日志的数量</span></span></a></li></ul></li><li><a class="level is-mobile" href="#1-11-复制"><span class="level-left"><span class="level-item">1.11 复制</span></span></a></li><li><a class="level is-mobile" href="#1-12-NoSQL"><span class="level-left"><span class="level-item">1.12 NoSQL</span></span></a></li><li><a class="level is-mobile" href="#1-13-大数据"><span class="level-left"><span class="level-item">1.13 大数据</span></span></a></li></ul></li><li><a class="level is-mobile" href="#2-InnoDB存储引擎"><span class="level-left"><span class="level-item">2 InnoDB存储引擎</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#2-1-基础"><span class="level-left"><span class="level-item">2.1 基础</span></span></a></li><li><a class="level is-mobile" href="#2-2-文件"><span class="level-left"><span class="level-item">2.2 文件</span></span></a></li><li><a class="level is-mobile" href="#2-3-表"><span class="level-left"><span class="level-item">2.3 表</span></span></a></li><li><a class="level is-mobile" href="#2-4-索引"><span class="level-left"><span class="level-item">2.4 索引</span></span></a></li><li><a class="level is-mobile" href="#2-5-锁"><span class="level-left"><span class="level-item">2.5 锁</span></span></a></li><li><a class="level is-mobile" href="#2-6-事务"><span class="level-left"><span class="level-item">2.6 事务</span></span></a></li><li><a class="level is-mobile" href="#2-7-备份与恢复"><span class="level-left"><span class="level-item">2.7 备份与恢复</span></span></a></li><li><a class="level is-mobile" href="#2-8-性能优化"><span class="level-left"><span class="level-item">2.8 性能优化</span></span></a></li></ul></li><li><a class="level is-mobile" href="#3-SQL语言"><span class="level-left"><span class="level-item">3 SQL语言</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Blog/"><span class="level-start"><span class="level-item">Blog</span></span><span class="level-end"><span class="level-item tag">17</span></span></a></li><li><a class="level is-mobile" href="/categories/Essay/"><span class="level-start"><span class="level-item">Essay</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Algorithms-Notes/"><span class="tag">Algorithms-Notes</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Cryptography/"><span class="tag">Cryptography</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Database/"><span class="tag">Database</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Divide-and-Conquer/"><span class="tag">Divide and Conquer</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/FFT/"><span class="tag">FFT</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Hashing/"><span class="tag">Hashing</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Internet/"><span class="tag">Internet</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Interview/"><span class="tag">Interview</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Number-Theory/"><span class="tag">Number Theory</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Sorting/"><span class="tag">Sorting</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Statistics/"><span class="tag">Statistics</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Web-APP/"><span class="tag">Web APP</span><span class="tag">1</span></a></div></div></div></div></div> </div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/site-logo.png" alt="Felix Feng&#039;s Zone" height="28"></a><p class="is-size-7"><span>&copy; 2022 Felix Feng</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
