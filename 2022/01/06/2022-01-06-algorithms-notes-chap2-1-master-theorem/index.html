@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>chap 2-1 分治算法-乘法、矩阵乘、主定理 - Felix Feng&#039;s Zone</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="XU FENG&#039;S ZONE"><meta name="msapplication-TileImage" content="/images/avatar.jpg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="XU FENG&#039;S ZONE"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="1. 分治（Divide and Conquer）分治算法是算法的重要分支之一，主要思想就是：  自上而下把问题划分成几个小的子问题，每个子问题与原问题类型相同。 自下而上递归地解决子问题。 把子问题的解适当地组合成原问题的解。  虽然分治法的核心结构是递归，但也不一定非得用函数递归来实现；递归法便于分析问题，迭代法可能却更为高效 。"><meta property="og:type" content="blog"><meta property="og:title" content="chap 2-1 分治算法-乘法、矩阵乘、主定理"><meta property="og:url" content="https://2horse9sun.github.io/2022/01/06/2022-01-06-algorithms-notes-chap2-1-master-theorem/"><meta property="og:site_name" content="Felix Feng&#039;s Zone"><meta property="og:description" content="1. 分治（Divide and Conquer）分治算法是算法的重要分支之一，主要思想就是：  自上而下把问题划分成几个小的子问题，每个子问题与原问题类型相同。 自下而上递归地解决子问题。 把子问题的解适当地组合成原问题的解。  虽然分治法的核心结构是递归，但也不一定非得用函数递归来实现；递归法便于分析问题，迭代法可能却更为高效 。"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://2horse9sun.github.io/images/posts/matrix_multiplication.png"><meta property="og:image" content="https://2horse9sun.github.io/images/posts/recurrence_tree.png"><meta property="article:published_time" content="2022-01-05T16:00:00.000Z"><meta property="article:modified_time" content="2025-01-25T13:38:50.662Z"><meta property="article:author" content="Felix Feng"><meta property="article:tag" content="Algorithms-Notes"><meta property="article:tag" content="Divide and Conquer"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/images/posts/matrix_multiplication.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://2horse9sun.github.io/2022/01/06/2022-01-06-algorithms-notes-chap2-1-master-theorem/"},"headline":"chap 2-1 分治算法-乘法、矩阵乘、主定理","image":["https://2horse9sun.github.io/images/posts/matrix_multiplication.png","https://2horse9sun.github.io/images/posts/recurrence_tree.png"],"datePublished":"2022-01-05T16:00:00.000Z","dateModified":"2025-01-25T13:38:50.662Z","author":{"@type":"Person","name":"Felix Feng"},"publisher":{"@type":"Organization","name":"Felix Feng's Zone","logo":{"@type":"ImageObject","url":"https://2horse9sun.github.io/images/site-logo.png"}},"description":"1. 分治（Divide and Conquer）分治算法是算法的重要分支之一，主要思想就是：  自上而下把问题划分成几个小的子问题，每个子问题与原问题类型相同。 自下而上递归地解决子问题。 把子问题的解适当地组合成原问题的解。  虽然分治法的核心结构是递归，但也不一定非得用函数递归来实现；递归法便于分析问题，迭代法可能却更为高效 。"}</script><link rel="canonical" href="https://2horse9sun.github.io/2022/01/06/2022-01-06-algorithms-notes-chap2-1-master-theorem/"><link rel="icon" href="/images/avatar.jpg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?6295a3485ca71319f7c2bb6050180382";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/site-logo.png" alt="Felix Feng&#039;s Zone" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/categories/Project">Project</a><a class="navbar-item" href="/categories/Essay">Essay</a><a class="navbar-item" href="/categories">Category</a><a class="navbar-item" href="/tags">Tag</a><a class="navbar-item" href="/archives">Archive</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><h1 class="title is-4 is-size-4-mobile" style="font-weight: bold">chap 2-1 分治算法-乘法、矩阵乘、主定理</h1><div class="article-meta is-size-7 level is-mobile" style="margin-top: -0.5rem; margin-bottom: 0.5rem"><div class="level-left"><i class="fas fa-calendar-alt"></i>  <span class="level-item"><time dateTime="2022-01-05T16:00:00.000Z" title="2022/1/6 00:00:00">2022-01-06</time></span><i class="fas fa-folder-open"></i>  <span class="level-item"><a class="link-muted" href="/categories/Blog/">Blog</a></span><i class="fas fa-eye"></i><span>  </span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><hr style="height:1px;margin:1rem 0"><div class="content" style=""><h2 id="1-分治（Divide-and-Conquer）"><a href="#1-分治（Divide-and-Conquer）" class="headerlink" title="1. 分治（Divide and Conquer）"></a>1. 分治（Divide and Conquer）</h2><p>分治算法是算法的重要分支之一，主要思想就是：</p>
+<ol>
+<li>自上而下把问题划分成几个小的子问题，每个子问题与原问题类型相同。</li>
+<li>自下而上递归地解决子问题。</li>
+<li>把子问题的解适当地组合成原问题的解。</li>
+</ol>
+<p>虽然分治法的核心结构是递归，但也不一定非得用函数递归来实现；递归法便于分析问题，迭代法可能却更为高效 。</p>
+<span id="more"></span>
+
+<h2 id="2-乘法"><a href="#2-乘法" class="headerlink" title="2. 乘法"></a>2. 乘法</h2><p>假设$x$和$y$是两个$n-bit$整数（若不足$n$位则补零至$n$），为了使用分治法实现乘法，我们可以考虑将$x,y$各分成两半：</p>
+<p>$$<br>x=(x_L)(x_R)=x_L\cdot 2^{\lfloor n/2 \rfloor}+x_R<br>$$</p>
+<p>$$<br>y=(y_L)(y_R)=y_L\cdot 2^{\lfloor n/2 \rfloor}+y_R<br>$$</p>
+<p>其中，$x_L$为$x$靠左的$\lceil n/2 \rceil-bit$整数，$x_R$为$x$靠右的$\lfloor n/2 \rfloor-bit$整数；$y_L$为$y$靠左的$\lceil n/2 \rceil-bit$整数，$y_R$为$y$靠右的$\lfloor n/2 \rfloor-bit$整数。两者相乘：</p>
+<p>$$<br>xy=(x_L\cdot 2^{\lfloor n/2 \rfloor}+x_R)(y_L\cdot 2^{\lfloor n/2 \rfloor}+y_R)=x_Ly_L\cdot 2^{2\lfloor n/2\rfloor}+(x_Ly_R+x_Ry_L)\cdot 2^{\lfloor n/2 \rfloor}+x_Ry_R<br>$$</p>
+<p>观察发现，我们把大的问题$xy$分成了四个小的子问题$x_Ly_L,x_Ly_R,x_Ry_L,x_Ry_R$，可以写出如下的递归关系式：</p>
+<p>$$<br>T(n)=4T(\lceil \frac{n}{2} \rceil)+O(n)<br>$$</p>
+<p>根据推导（后面会证明），该算法复杂度为$O(n^2)$，与普通乘法并无二异。</p>
+<p>再仔细想想，上述表达式中的$x_Ly_R+x_Ry_L$可以被写成$(x_L+x_R)(y_L+y_R)-x_Ly_L-x_Ry_R$。总的来看，子问题的数目就从4降到了3，这是否能降低复杂度？写出递归表达式：</p>
+<p>$$<br>T(n)\leq3T(\lceil \frac{n}{2} \rceil+1)+O(n)<br>$$</p>
+<p>容易看出，表达式内加上的常数项（$x_L+x_R,y_L+y_R$可能有$\lceil \frac{n}{2} \rceil+1$位）并不会影响最终的复杂度，我们不如写成：</p>
+<p>$$<br>T(n)=3T(\lceil \frac{n}{2} \rceil)+O(n)<br>$$</p>
+<p>根据推导，现在的复杂度为$O(n^{\log_2 3})\approx O(n^{1.59})$，比普通乘法要更快！</p>
+<p>伪代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function multiply2(x, y)&#123;</span><br><span class="line">	n = max(size of x, size of y)</span><br><span class="line">	if n=1: return xy</span><br><span class="line">	</span><br><span class="line">	x_L, x_R = leftmost ⌈n/2⌉, rightmost ⌊n/2⌋ bits of x</span><br><span class="line">	y_L, y_R = leftmost ⌈n/2⌉, rightmost ⌊n/2⌋ bits of y</span><br><span class="line">	</span><br><span class="line">	P1 = multiply2(x_L, y_L)</span><br><span class="line">	P2 = multiply2(x_R, y_R)</span><br><span class="line">	P3 = multiply2(x_L+x_R, y_L+y_R)</span><br><span class="line">	return P1×2^(2⌊n/2⌋) + (P3-P1-P2)×2^(⌊n/2⌋) + P2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，我们一直递归到了<code>n=1</code>的情况。在实际操作中，大整数被拆成的每个部分可能是16位，我们可以只递归到<code>n=16</code>的情况，然后直接用处理器内置的算术运算指令进行运算。</p>
+<p>我们已经把乘法的复杂度从$O(n^2)$优化到了$O(n^{1.59})$，还有没有更快的方法呢？确实有，后面会提到。</p>
+<h2 id="3-矩阵乘法"><a href="#3-矩阵乘法" class="headerlink" title="3. 矩阵乘法"></a>3. 矩阵乘法</h2><p>设$X,Y$都是$n\times n$的矩阵，$Z$为$X,Y$的乘积：</p>
+<p><img src="/images/posts/matrix_multiplication.png" alt="matrix_multiplication"></p>
+<p>$$<br>Z_{ij}=\sum_{k=1}^n X_{ik}Y_{kj}<br>$$</p>
+<p>使用以上表达式求解矩阵乘，复杂度为$O(n^3)$，有无更快的方法？</p>
+<p>Strassen提出了一种基于分治法的矩阵乘算法。$X,Y$可以分别被划分成$\lceil n/2\rceil \times \lceil n/2\rceil$的四个块（block），若$n$不是偶数，则填补全零的一行/列：</p>
+<p>$$<br>\begin{equation}<br>X=<br>\begin{bmatrix}<br> A &amp; B \\ C &amp; D<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
+<p>$$<br>\begin{equation}<br>Y=<br>\begin{bmatrix}<br> E &amp; F \\ G &amp; H<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
+<p>容易证明出：</p>
+<p>$$<br>\begin{equation}<br>XY=<br>\begin{bmatrix}<br> A &amp; B \\ C &amp; D<br>\end{bmatrix}<br>\begin{bmatrix}<br> E &amp; F \\ G &amp; H<br>\end{bmatrix}<br>=\begin{bmatrix}<br> AE+BG &amp; AF+BH \\ CE+DG &amp; CF+DH<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
+<p>算出结果后要删除掉之前填补过的全零行/列。</p>
+<p>上述算法把求解$XY$的问题，分成了8个子问题，可以列出下面的递归关系式：</p>
+<p>$$<br>T(n)=8T(\lceil \frac{n}{2}\rceil)+O(n^2)<br>$$</p>
+<p>根据推导，复杂度为$O(n^3)$。Strassen所做的优化与上面的乘法优化一样，把8个子问题缩减到了7个子问题：</p>
+<p>$$<br>P_1=A(F-H)<br>$$</p>
+<p>$$<br>P_2=(A+B)H<br>$$</p>
+<p>$$<br>P_3=(C+D)E<br>$$</p>
+<p>$$<br>P_4=D(G-E)<br>$$</p>
+<p>$$<br>P_5=(A+D)(E+H)<br>$$</p>
+<p>$$<br>P_6=(B-D)(G+H)<br>$$</p>
+<p>$$<br>P_7=(A-C)(E+F)<br>$$</p>
+<p>$$<br>\begin{equation}<br>XY=</p>
+<p>=\begin{bmatrix}<br> P_5+P_4-P_2+P_6 &amp; P_1+P_2 \\ P_3+P_4 &amp; P_1+P_5-P_3-P_7<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
+<p>此时递归关系式变为：</p>
+<p>$$<br>T(n)=7T(\lceil \frac{n}{2}\rceil)+O(n^2)<br>$$</p>
+<p>根据推导，Strassen矩阵乘算法的复杂度为$O(n^{\log_2 7})\approx O(n^{2.81})$。</p>
+<h2 id="4-主定理（Master-Theorem）"><a href="#4-主定理（Master-Theorem）" class="headerlink" title="4. 主定理（Master Theorem）"></a>4. 主定理（Master Theorem）</h2><p>分析分治算法的复杂度时，我们都推出了递归关系式，如何快速根据关系式得到复杂度呢？可以直接使用主定理：</p>
+<blockquote>
+<p><strong>Master Theorem</strong></p>
+<p>令 $a\geq 1$和 $b&gt;1$是常数，$f(n)$是一个函数，$T(n)$是定义在非负整数上的递归表达式：</p>
+<p>$$<br>T(n)=aT(n/b)+f(n)<br>$$</p>
+<p>其中，$n/b$可以是 $\lceil n/b \rceil$或是 $\lfloor n/b \rfloor$，那么 $T(n)$有如下渐进界：</p>
+<ol>
+<li>若对于某个常数 $\varepsilon&gt;0$有 $f(n)=O(n^{\log_b a -\varepsilon})$，则 $T(n)=\Theta(n^{\log_b a})$。</li>
+<li>若 $f(n)=\Theta(n^{\log_b a})$，则 $T(n)=\Theta(n^{\log_b a}\log n)$。</li>
+<li>若对于某个常数 $\varepsilon&gt;0$有 $f(n)=\Omega(n^{\log_b a +\varepsilon})$，且对于某个常数 $c&lt;1$和所有足够大的 $n$有 $af(n/b)\leq cf(n)$，则 $T(n)=\Theta(f(n))$。</li>
+</ol>
+</blockquote>
+<p>简单来说就是，我们将函数$f(n)$与$n^{\log_b a}$进行比较：若$f(n)$渐进小于（多项式意义上小于，小$n^{\varepsilon}$这么多）$n^{\log_b a}$，则$T(n)=\Theta(n^{\log_b a})$；若$f(n)$渐进等于$n^{\log_b a}$，则$T(n)=\Theta(n^{\log_b a}\log n)$；若$f(n)$渐进大于$n^{\log_b a}$（多项式意义上大于，大$n^{\varepsilon}$这么多），且满足正则条件$af(n/b)\leq cf(n)$（大多数多项式界函数都满足），则$T(n)=\Theta(f(n))$。</p>
+<p>不是所有情况都能直接套用主定理，比如$T(n)=2T(n/2)+n\log n$就无法套用情况3。</p>
+<p><img src="/images/posts/recurrence_tree.png" alt="recurrence_tree"></p>
+<p>$Proof$：首先证明若$n$恰好为$b$的幂的情况。</p>
+<p>根据递归树，容易推出：</p>
+<p>$$<br>\begin{equation}<br>\begin{aligned}<br>T(n) &amp; = aT(n/b)+f(n) \\ &amp; =a^2T(n/b^2)+f(n)+af(n/b) \\ &amp;= a^3f(n/b^3)+f(n)+af(n/b)+a^2f(n/b^2) \\ &amp;= \cdots \\ &amp;=a^{\log_b n}\cdot\Theta(1)+\sum_{k=0}^{\log_b n - 1} a^kf(n/b^k) \\ &amp;=\Theta(n^{\log_b a})+\sum_{k=0}^{\log_b n - 1} a^kf(n/b^k)<br>\end{aligned}<br>\end{equation}<br>$$</p>
+<p>令$g(n)=\sum_{k=0}^{\log_b n - 1} a^kf(n/b^k)$，</p>
+<p>对于情况1：$f(n)=O(n^{\log_b a -\varepsilon})$，代入公式：</p>
+<p>$$<br>\begin{equation}<br>\begin{aligned}<br>g(n) &amp;=O(\sum_{k=0}^{\log_b n - 1} a^k(\frac{n}{b^k})^{\log_b a -\varepsilon}) \\ &amp;=O(n^{\log_b a -\varepsilon}\sum_{k=0}^{\log_b n - 1}(b^{\varepsilon})^k) \\ &amp;= O(n^{\log_b a -\varepsilon}\cdot\frac{n^{\varepsilon}-1}{b^{\varepsilon}-1}) \\ &amp;= n^{\log_b a -\varepsilon}\cdot O(n^{\varepsilon}) \\ &amp;=O(n^{\log_b a})<br>\end{aligned}<br>\end{equation}<br>$$</p>
+<p>带入$T(n)$的表达式，可得$T(n)=\Theta(n^{\log_b a})$。</p>
+<p>对于情况2：$f(n)=\Theta(n^{\log_b a})$，代入公式：</p>
+<p>$$<br>\begin{equation}<br>\begin{aligned}<br>g(n) &amp;=\Theta(\sum_{k=0}^{\log_b n - 1} a^k(\frac{n}{b^k})^{\log_b a}) \\ &amp;= \Theta(n^{\log_b a}\cdot \sum_{k=0}^{\log_b n - 1}1 ) \\ &amp;=\Theta(n^{\log_b a}\log n)<br>\end{aligned}<br>\end{equation}<br>$$</p>
+<p>带入$T(n)$的表达式，可得$T(n)=\Theta(n^{\log_b a}\log n)$。</p>
+<p>对于情况3：首先证明一下，对于某个常数 $c&lt;1$和所有足够大的$n$有$af(n/b)\leq cf(n)$，就已经暗含了若对于某个常数$\varepsilon&gt;0$有$f(n)=\Omega(n^{\log_b a +\varepsilon})$。将$af(n/b)\leq cf(n)$迭代$k$次，可得$a^kf(n/b^k)\leq c^kf(n)$，令$n=b^k$，则$f(n)\geq (a/c)^{\log_b n}\cdot f(1)=n^{\log_b a - \log_b c}\cdot f(1)$，即$f(n)=\Omega(n^{\log_b a +\varepsilon})$。</p>
+<p>观察$g(n)$的表达式，可知$g(n)=\Omega(f(n))$。又因为：</p>
+<p>$$<br>\begin{equation}<br>\begin{aligned}<br>g(n) &amp;=\sum_{k=0}^{\log_b n - 1} a^kf(n/b^k) \\ &amp;\leq \sum_{k=0}^{\log_b n - 1} c^kf(n)+O(1) \\ &amp;\leq f(n) \sum_{k=0}^{\infty} c^k+O(1) \\ &amp;= f(n)\cdot\frac{1}{1-c}+O(1)\\ &amp;=O(f(n))<br>\end{aligned}<br>\end{equation}<br>$$</p>
+<p>故$g(n)=\Theta(f(n))$。带入$T(n)$的表达式，可得$T(n)=\Theta(f(n))$。</p>
+<p>下面证明若$n$不是$b$的幂的情况。易证有如下不等式成立：</p>
+<p>$$<br>\cdots\leq n/b\leq b^{\lfloor \log_b n\rfloor-1}\leq n\leq b^{\lfloor \log_b n\rfloor}\leq bn\leq b^{\lfloor \log_b n\rfloor+1}\leq\cdots<br>$$</p>
+<p>上述不等式说明，对于任意$n$，都能在附近找到一个比它大的数（不大于$bn$）使其称为$b$的幂，都能在附近找到一个比它小的数（不小于$n/b$）使其称为$b$的幂。</p>
+<p>先考虑上取整的情况，参数调用序列如下：</p>
+<p>$$<br>n,\lceil n/b \rceil,\lceil \lceil n/b \rceil/b \rceil,\lceil \lceil \lceil n/b \rceil/b \rceil/b \rceil,\cdots<br>$$</p>
+<p>令$n_k$表示序列中的第$k$个元素：</p>
+<p>$$<br>\begin{equation}<br>n_k=<br>\begin{cases}<br> n, &amp; k=0 \\  \lceil n_{k-1}/b \rceil, &amp; k&gt;0<br>\end{cases}<br>\end{equation}<br>$$</p>
+<p>则根据上述不等式，可得$n_k\in[b^{\lfloor \log_b n\rfloor-1}/b^k,b^{\lfloor \log_b n\rfloor}/b^k]$，即$n_k=\Theta(n/b^k)$。</p>
+<p>根据递归树，容易推出：</p>
+<p>$$<br>T(n)=\Theta(n^{\log_b a})+\sum_{k=0}^{\lfloor\log_b n\rfloor - 1} a^kf(n_k)<br>$$</p>
+<p>令$g(n)=\sum_{k=0}^{\lfloor\log_b n\rfloor - 1} a^kf(n_k)$，</p>
+<p>对于情况1：$f(n)=O(n^{\log_b a -\varepsilon})$，代入公式：</p>
+<p>$$<br>\begin{equation}<br>\begin{aligned}<br>g(n) &amp;=\sum_{k=0}^{\lfloor\log_b n\rfloor - 1} a^kO(n_k^{\log_b a -\varepsilon}) \\ &amp;= O(\sum_{k=0}^{\lfloor\log_b n\rfloor - 1} a^k(\frac{n}{b^k})^{\log_b a -\varepsilon}))<br>\end{aligned}<br>\end{equation}<br>$$</p>
+<p>证明同上。</p>
+<p>对于情况2：$f(n)=\Theta(n^{\log_b a})$，代入公式：</p>
+<p>$$<br>\begin{equation}<br>\begin{aligned}<br>g(n) &amp;=\sum_{k=0}^{\lfloor\log_b n\rfloor - 1} a^k\Theta(n_k^{\log_b a}) \\ &amp;= \Theta(\sum_{k=0}^{\lfloor\log_b n\rfloor - 1} a^k(\frac{n}{b^k})^{\log_b a})<br>\end{aligned}<br>\end{equation}<br>$$</p>
+<p>证明同上。</p>
+<p>对于情况3：观察$g(n)$的表达式，可知$g(n)=\Omega(f(n))$。根据$af(n_1)\leq cf(n)$，容易推出$a_kf(n_k)\leq c^k f(n)$，证明同上。</p>
+<p>下取整的证明与上取整几乎相同，此处不再赘述。▮</p>
+<p>现在忘了上面繁琐的证明吧，直接记住下面简化版本的主定理，已经能解决大部分问题了：</p>
+<blockquote>
+<p><strong>Master Theorem (simplified)</strong></p>
+<p>令 $a\geq 1$和 $b&gt;1$是常数，$T(n)$是定义在非负整数上的递归表达式：</p>
+<p>$$<br>T(n)=aT(n/b)+O(n^d)<br>$$</p>
+<p>其中，$n/b$可以是 $\lceil n/b \rceil$或是 $\lfloor n/b \rfloor$，那么 $T(n)$有如下渐进界：</p>
+<p>$$<br>\begin{equation}<br>T(n)=<br>\begin{cases}<br>O(n^{\log_b a}), &amp; \log_b a&gt;d \\  O(n^d\log n), &amp; \log_b a=d \\  O(n^d), &amp; \log_b a&lt;d<br>\end{cases}<br>\end{equation}<br>$$</p>
+</blockquote>
+<p>使用简化版的主定理，可以一眼看出上述提到的乘法和矩阵乘的复杂度：</p>
+<p>$$<br>T(n)=3T(\frac{n}{2})+O(n),\log_b a=\log_2 3 &gt; d=1,O(n^{\log_23})<br>$$</p>
+<p>$$<br>T(n)=7T(\frac{n}{2})+O(n^2),\log_ba=\log_27&gt;d=2,O(n^{\log_27})<br>$$</p>
+<p>Quick Link: <a href="https://2horse9sun.github.io/2021/12/19/2021-12-19-algorithms-notes-overview/">算法笔记整理</a></p>
+</div><hr style="height:1px;margin:1rem 0"></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2022/01/08/2022-01-08-algorithms-notes-chap2-2-sort_and_select/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">chap 2-2 分治算法-排序和选择</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/01/02/2022-01-02-algorithms-notes-chap1-8-application/"><span class="level-item">chap 1-8 数论算法-综合应用</span><i class="level-item fas fa-chevron-right"></i></a></div></nav></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/images/avatar.jpg" alt="Felix Feng"></figure><p class="title is-size-4 is-block" style="font-weight: bold">Felix Feng</p><p class="is-size-6 is-block" style="margin-top: 1rem">jsjhfx@163.com</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Xi&#039;an, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading" style="font-weight: bold">Posts</p><a href="/archives"><p class="title">21</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading" style="font-weight: bold">Categories</p><a href="/categories"><p class="title">3</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading" style="font-weight: bold">Tags</p><a href="/tags"><p class="title">14</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/2horse9sun" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/2horse9sun"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="is-4-tablet is-4-desktop is-3-widescreen  is-sticky" style="margin-top: 1.5rem"> <div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#1-分治（Divide-and-Conquer）"><span class="level-left"><span class="level-item">1. 分治（Divide and Conquer）</span></span></a></li><li><a class="level is-mobile" href="#2-乘法"><span class="level-left"><span class="level-item">2. 乘法</span></span></a></li><li><a class="level is-mobile" href="#3-矩阵乘法"><span class="level-left"><span class="level-item">3. 矩阵乘法</span></span></a></li><li><a class="level is-mobile" href="#4-主定理（Master-Theorem）"><span class="level-left"><span class="level-item">4. 主定理（Master Theorem）</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Blog/"><span class="level-start"><span class="level-item">Blog</span></span><span class="level-end"><span class="level-item tag">18</span></span></a></li><li><a class="level is-mobile" href="/categories/Essay/"><span class="level-start"><span class="level-item">Essay</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Algorithms-Notes/"><span class="tag">Algorithms-Notes</span><span class="tag">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Cryptography/"><span class="tag">Cryptography</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Database/"><span class="tag">Database</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Divide-and-Conquer/"><span class="tag">Divide and Conquer</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/FFT/"><span class="tag">FFT</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Hashing/"><span class="tag">Hashing</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Internet/"><span class="tag">Internet</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Interview/"><span class="tag">Interview</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Number-Theory/"><span class="tag">Number Theory</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Sorting/"><span class="tag">Sorting</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Statistics/"><span class="tag">Statistics</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Web-APP/"><span class="tag">Web APP</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/iOS-APP/"><span class="tag">iOS APP</span><span class="tag">1</span></a></div></div></div></div></div> </div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/site-logo.png" alt="Felix Feng&#039;s Zone" height="28"></a><p class="is-size-7"><span>&copy; 2025 Felix Feng</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
